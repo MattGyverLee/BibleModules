@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<structure>
+   <page zip="Manual_Contents/Manual_Contents">
+      <name>Manual_Contents</name>
+      <creator>matthew_lee</creator>
+      <user>matthew_lee</user>
+      <is_html>0</is_html>
+      <wysiwyg>n</wysiwyg>
+   </page>
+   <structure>
+      <page zip="Module/Module">
+         <name>Module</name>
+         <creator>matthew_lee</creator>
+         <user>matthew_lee</user>
+         <is_html>0</is_html>
+         <wysiwyg>n</wysiwyg>
+      </page>
+      <structure>
+         <page zip="Nerd/Nerd">
+            <name>Nerd</name>
+            <creator>matthew_lee</creator>
+            <user>matthew_lee</user>
+            <is_html>0</is_html>
+            <wysiwyg>n</wysiwyg>
+         </page>
+      </structure>
+   </structure>
+</structure>

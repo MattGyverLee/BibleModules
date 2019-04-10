@@ -1,0 +1,470 @@
+!Module
+The Nerdy Bits
+
+This module is intended to guide a moderate-to-advanced user through creating and publishing a Bible Module through Paratext.
+----
+!!1.1: Creating a Paratext Bible Module
+
+According to Paratext help, a Bible module "brings together text selections from a Paratext project ". A Bible module consists of a specification file (or skeleton) containing literal text and verse references to be imported from a Paratext project. This section is intended to cover the basic needs of any Bible module, and not just lectionaries. As with documentation of any programming language, this section will be necessarily technical.
+You can think of a Bible Module as a Biblical shell book, where all of the verses are automagically
+This is a favourite word that (for the author) can be traced back to a warning at Disney World: "Caution, doors open automagically!" imported. Once imported, any remaining text in the specification file can be translated into the vernacular to create a new vernacular book.
+Bible Modules are a relatively unknown yet powerful Paratext feature that could use some detailed description. Bible modules can be storybooks with included Biblical text, such as the Lives of the Prophets story series. They could be Bible study or Sunday School materials that pull heavily from Bible Text.
+Let's define some key terms: -- Unified Standard Format Markers
+Full documentation and history of  are available at (( https://ubsicap.github.io/usfm/master/index.html|https://ubsicap.github.io/usfm/master/index.html )) . The latest version of , as of writing, is  3.0, from April 2019. (often referred to as "markers" or "SFM markers") are "a notation for identifying the components and structure of an electronic document " that are a standardised subset of  markers used for purposes beyond Bible Translation such as dictionaries.  consists of a set of various open-ended markers (such as \p for paragraph or \v for verse) and closed markers (such as \ft and \ft* for bold). The vast majority of markers mark structural or functional features of a document, and a few, no doubt bending to the desires of users, mark formatting features such as bold and italic.Specification File -A Specification File is a  file that contains the static content of a Bible Module intermixed with Bible references. This file, with an .SFM extension, is the file that should be shared (see section ((Saving a copy of your Bible Module for Sharing|1.7.1: Saving a copy of your Bible Module for Sharing))) when sharing a Bible module to another project.Bible Module -Though this is probably not a hard-and-fast definition, the authors will use Bible Module to refer to the combination of a specification file and a project.
+!!!1.1.1: Extra Books
+
+Each Paratext project has eight extra multi-use books, XXA through XXG, that can be used for content beyond Front Matter, Back Matter, Glossaries, and actual Bible books (each of these has a dedicated book). If your project already uses one or more of these XX books, you can choose another one to add your Bible Module.
+While the number of books is limited, there is no need to keep unused Bible Modules in your project, and so it is possible for each individual XX book to consecutively, but not concurrently, host different Bible Modules. It may be useful at this point to find out which XX books are already in use in your target project.
+!!!1.1.2: Creating a new Bible Module
+
+Let's get started! The first thing you'll need to do is to connect one of your Extra books to a Bible Module.
+# Click to activate your translation project.
+# From the Tools menu, choose Open Bible Module''The following dialogue box will open:''{img src="https://raw.githubusercontent.com/erros84/PTManuals/master/images/Open%20Bible%20Module.png" class=img-responsive}
+# Select the empty Extra Book you want to use for your Bible module.
+# From this dialogue box, you have 3 options, choose according to your situation: 
+# Copy from a specification file: Choose a predefined Bible Module from your _Modules directory in My Paratext 8 Projects and copy it to your project directory where you will be able open and customize it.
+# Open existing module: Choose from the modules that you have already copied or started from scratch in your project.
+# Create new specification file: Create a new, empty module that you will define in Paratext.
+{BOX(bg="#FFE6FF" width="60%")}
+Note: Whatever option you choose, the new file will be created or copied into your  _Modules folder. Any customization made from this point will be made only in the copy inside your folder.{BOX}
+!!!1.1.3: Four Views of Bible Modules
+
+When working in a Bible Module, Paratext will replace the four standard views available on the View menu with a new set of views. Note that only Unformatted Specification and Standard Specification are editable. Below is an explanation of the four Bible Module views.Unformatted Specification:This is an editable no-frills view with no formatting and no marker pop-ups. This can be nice for working with bulk changes. Special codes such as \ref and $() will have no effect in this view and will show up as these literal codes.Preview Output:This read-only view gives a "print preview" of how your Bible Module will look when exported. It uses standard formatting used for text marked with each  marker, and the markers themselves are hidden. The \ref code will be replaced by current text imported from the Bible books and references marked with $() appear with vernacular names and formatting based on the settings in Project > Scripture Reference Settings.Standard Specification:This editable view is a combination of the preview and specification files. Static text will be shown in an appropriate font and style, but all  markers will show up as coloured
+Markers that are valid in this specific context will show up in green, and invalid markers will show up in red.markers that can be edited. Special codes such as \ref and $() will have no effect in this view and will show up as these codes. Most work will be done in this view, as the colours give useful feedback while working with your Bible module.Standard Output:This read-only "combo" view will import \ref text and format $() references, but the  markers used for structure and content will still be visible.
+!!!!1.1.3.1: Performance Considerations
+
+Since Bible Modules don't tend to be organised by chapter and verse, the whole book is filed under chapter one, verse zero of the book. Paratext was not designed to load a whole Bible book into memory, which is why the option View>By Chapter is activated by default. De-selecting this option will force Paratext to load entire books into memory and Paratext will become slow to respond.
+When using a Bible module that may contain hundreds of pages of text, the same slowdown is experienced. Using a computer that well exceeds Paratext's minimum hardware requirements for Specification development, will alleviate much of the delay, but it should be expected that a large Bible module will respond slowly.
+With the slowdown of large books in Paratext, it may be easiest to work in a text editor
+If you're looking for an excellent multilingual text editor, I wholeheartedly recommend EditPad Pro ($50 at (( https://www.editpadpro.com/|https://www.editpadpro.com/ )) ) or Editpad Lite (free at (( https://www.editpadpro.com/|https://www.editpadpro.com/ )) ). JGSoft, the developer, has what is probably the most complete regular expression ((( https://www.regular-expressions.info/|https://www.regular-expressions.info/ ))) engine of any software. The best feature is that find/replace is dockable and in the same font, size and encoding of the document text. Even the free version of EditPad is light years ahead of Notepad++ ((( https://notepad-plus-plus.org/|https://notepad-plus-plus.org/ ))). to edit the specification file rather than Paratext, especially if the document will be complex.
+!!!1.1.4: Rules for Bible Modules
+
+A Bible Module, like any text in Paratext, will be processed by Paratext to create various output forms. This means that to achieve the desired output, one must understand the limits of the system. Some errors will result in errors caught by the system, but others will result in errors in the outputted text.
+In exploring the limits of Bible module specification files, much of the content in section ((Rules for Bible Modules|1.1.4: Rules for Bible Modules)) was previously outlined in an abbreviated form by author Matthew Lee and posted here: (( https://lingtran.net/Troubleshooting+Modules|https://lingtran.net/Troubleshooting+Modules )).
+!!!!1.1.4.1: USFM Markers
+
+Whenever possible, use a valid USFM marker or marker pair that is appropriate to the content you want to display. You can use any valid USFM markers in your Specification File. It is very likely that you will need markers in your Bible Module that you have never used in Bible books. Take some time to brows through the resources at (( https://ubsicap.github.io/usfm/master/index.html|https://ubsicap.github.io/usfm/master/index.html )) .
+!!!!1.1.4.2: Using Custom Markers
+
+For items of your module that will need special marking, but do not fit within the strict structure of , you can (in this case) create custom markers for your document that will pass through to the export. For example, the a lectionary included the colour of the altar cloth as \col which was output right aligned and italic. These custom markers will probably not show up in the intended font and style in the initial export, but can be quickly restyled as in section ((Unravelling Word Styles|1.5.4: Unravelling Word Styles)). Though this is a paragraph style, the same holds true for character styles (in the form \col...\col*)
+!!!!1.1.4.3: Importing “Live” Bible Text
+
+The headline feature of a Bible Module is that it always reflects the latest Bible text from your project. Each time the module is opened, it will re-import each verse from each book of the Bible to make sure that the file is up to date. This creates a huge advantage over copy and paste, as there is no need to remember which texts have been updated since you last copied them.
+Tags in the format \ref MAT 5:1 will be replaced with the actual referenced text from the current project. After the \ref marker, you must use a standard English chapter-verse specification, regardless of the chapter verse parameters configured in your project.{img src="https://raw.githubusercontent.com/erros84/PTManuals/master/images/InsideVerseRef.png" class=img-responsive}Elements of a Scripture Reference
+A typical reference will consist of 9 elements (see figure ):
+# a normal space
+# the reference marker: \ref
+# a normal space
+# the English 3-letter code for each book (i.e. GEN, MAT)
+# a normal space
+# the chapter number
+# a colon
+# a verse number (i.e. 1), verse range (i.e. 1-5), or verse list (i.e. 1,5).
+# one more space
+The dividing period ":" and verse continuation dash "-", and continuing commas (,) are the only valid punctuation for a Bible reference. The multiple chapter em dash
+em dash: [[—] A version of hyphen with the same width of a lowercase m, thus given the name "em dash. "U+2014 em dash is used to make a break—like this—in the flow of a sentence. " For the default English verse references in Paratext, an em dash is used to separate verse references that are in different chapters. (—), semicolon (;), periods (.), parentheses, and further spaces are not valid in the numerical section of a \ref reference.
+Partial verse letters (i.e. 5:9a) will be ignored, and the whole verse will be imported. See section ((References with Partial Verses|1.1.4.3: References with Partial Verses)) for specific workarounds.Importing Whole Chapters
+
+In Paratext 7.5+, you could not simply insert \ref PSA 1, you had to list the verses explicitly such as \ref PSA 1:1-6. In Paratext 8, \ref PSA 1 is possible, but note that the chapter number will still not be included in the text.References that span multiple chapters
+
+References bridging several chapters do work, but oddly they expect a hyphen (\ref 2CO 5:20-6:10) instead of the proper em dash (\ref 2CO 5:20—6:10), Nevertheless, you should probably split up chapters into separate \refs to break up the text or to add chapter numbers (which cannot be imported). It is probably best to split the reference into \ref 2CO 5:20-21 and \ref 2CO 6:1-10 and add an extra \p (and maybe \c ) in between to alert the reader to a change of chapter.References with Commas
+
+References that use commas to jump verses sometimes work (\ref ACT 1:1-5,8), but don't other times do not (\ref GEN 4:26-5:1,3 does not import verse 3). From testing, It seems that you are only allowed to use one comma "," or a dash "-" in each reference, and not both. These combinations cause silent errors (missing text) that are hard to find without reading the text, and thus should generally be avoided in \ref, while they are fine in $() formatted references. From a formatting perspective, it may be best to split such a \ref into separate lines, and give an extra \p in between if you want to alert the reader to a jump in continuity.References with Partial Verses
+
+Verses not split into parts in the text are usually imported completely. Thus \ref 2CO 5:20b imports all of 5:20. For the benefit of the translator working with a Bible version in a different language, it may be best to avoid partial verse references in Bible Modules if possible.
+If you must use partial references in your publication, it is recommended that you check each one in your output to verify that it appears as expected, you may have to manually remove unwanted text from the exported output.
+!!!!1.1.4.4: Formatted References
+
+Tags in the format $(MAT 5:1) will be dynamically reformatted to show the vernacular book title (as chosen in Project>Scripture Reference Settings>Book Names>Cross-References (\xt) use) and the verse references will be reformatted to follow your Scripture Reference Settings (as chosen in Tools>Scripture Reference Settings>Reference Format). Do not write these out manually (i.e. Matthew 5:7) in your specification file unless you intend for certain references to be left in a vehicular language by the translators (see section ((Customising and Translating your Map File|1.1.6: Customising and Translating your Map File))). The syntax requirements for formatted references are less restrictive than \refs. The dividing colon ":", verse continuation "-", list of verses comma (,), the multiple-chapter em dash (—), the list of chapter/book semicolon (;) are all valid. Parentheses are not valid. Periods, parentheses, and further spaces are not valid in the numerical section of a reference, and partial verse letters (i.e. 5:9a) will be ignored.References with Very Custom Punctuation
+
+Some communities may want "custom" punctuation of verse references (i.e. Catholic Psalm chapters from ) that Paratext's Scripture Reference settings just can't parse. For example, a reference with internal parentheses $(LUK 2:1-14,(15-20)), indicating an optional reading in a lectionary, crashes the Module parser and the reference text does not show (failing with just a closing parenthesis). If your Module requires "custom" formatting of verse references, you can do this: $(LUK) 2:1-14,(15-20). The advantage is that the Book Title is automagically replaced with the TOC2 or TOC3 specified, but the disadvantage is that Paratext no longer verifies the correctness of the reference in Basic Checks.
+!!!!1.1.4.5: Literal Text
+
+Not all text in a Specification file will be imported or translated by the export process. Some literal text, such as headings and non-biblical texts will likely be added to the specification file. Titles should be marked with standard  structural markers such as \mt1, \mt2, \s1 and \s2. Prayers, explanations, and other texts can be marked by \p, \q1, and \q2. Bible modules will usually not contain structural verse markers or chapter markers, as they are organised chronologically.
+If the target language group wants to localise the guidepost terms in your Bible Module, and the authors do encourage this, see section ((Customising and Translating your Map File|1.1.6: Customising and Translating your Map File)).
+!!!!1.1.4.6: Verifying your Bible Module
+
+With the exception of a few "silent" errors mentioned in section ((Importing “Live” Bible Text|1.1.4.3: Importing “Live” Bible Text)) and ((Formatted References|1.1.4.4: Formatted References)), Paratext can help you to verify both the existence and formatting of your Bible References. When working in the Standard Specification or Unformatted Specification views (see section ((Four Views of Bible Modules|1.1.3: Four Views of Bible Modules))), Paratext will show you the status of your Bible Module in the corner of the window, as seen in figure .{img src="https://raw.githubusercontent.com/erros84/PTManuals/master/images/VerifyBM.png" class=img-responsive}Live verification of your Bible Module
+These statistics will be updated each time you save the file. The first statistic is the number of verses listed in the module specification that have been translated, as well as a percentage. If your project is only translating scripture portions, this information will be a very useful gauge for project progress. The next part of this menu is a count of errors. These errors often represent typos in your specification file, such as referencing a non-existent chapter or verse. Especially with challenges of versification, this tool is the friend of any Bible module user. The icon of a blue check on a page will take you directly to a list of untranslated references, invalid references, and other structural errors in your Bible Module.{img src="https://raw.githubusercontent.com/erros84/PTManuals/master/images/VerifyBM2.png" class=img-responsive}The resulting list after clicking on the check button.
+The included "''Warning: double clicking to go to text in a Bible Module is not reliable''" is to be noted. Since Bible Modules don't tend to be organised by chapter and verse, the whole book is filed under chapter one, verse zero of the book. See section ((Performance Considerations|1.1.3.1: Performance Considerations)) for more information on this. You will have to find the mentioned errors by scrolling or using Find/Replace.
+!!!1.1.5: Versification Woes
+
+One of the first lines in your Bible module will start with \vrs, which refers to Versification.
+Paratext supports the predefined and custom versifications. The quoted text in the following section is drawn from Paratext Help :Original (org):"Old Testament based on Hebrew versification, New Testament and Deuterocanonical books based on the Septuagint". One large difference from English is that often Psalm descriptions such as "A Psalm of David" are numbered as verse 1.English (eng):"Old Testament, New Testament and Deuterocanonical books based on a tradition used by many English and Spanish Bibles" Unlike Original, descriptions such as "A Psalm of David" are not part of the verse content.Septuagint (lxx):"Old Testament, New Testament and Deuterocanonical books based on the Septuagint "Vulgate (vul):"Old Testament, New Testament and Deuterocanonical books based on the Vulgate" Similar to Original, this versification is sometimes used by Catholic translations that use Latin sources.
+For relatively small projects, especially ones centered in the New Testament, versification may not have a large impact on your Bible module. As a bonus, if the versification chosen in the Bible module does not match the versification chosen in the target project under Project > Project Properties and Settings, Paratext will attempt to "translate" your project into the target versification when extracting text from the Bible.
+If your translation uses a versification other than English, you may have to adapt your Bible Module to this versification. This is surprisingly non-trivial and can be a monotonous and error-prone task to do manually. There is script developed by author Matthew Lee that exists to convert a Bible module in one versification to another. It can also be run on your current module file to verify that you have not created any "broken" or disallowed references. This Python script can be downloaded here (( https://github.com/erros84/PtxModuleVersification/|https://github.com/erros84/PtxModuleVersification/ )) .
+!!!1.1.6: Customising and Translating your Map File
+
+Your Specification file will contain a mix of imported and literal text. In the example of a lectionary, this literal text will include most of your headings. Based on the considerations in section ((|: )), you may need to translate your specification file into a language understood by the national translators, so that they, in turn, can translate the relevant parts into the vernacular. You may also want to duplicate information that is intended to be shown in multiple languages (i.e. Vernacular and official languages).
+As many of the snippets of text may be repeated, you may choose some method of Find and Replace, starting with the longest phrase and working to the shortest
+This method avoids errors where shorter sections inside a text from being replaced before the longer sections..
+----
+!!1.2: Creating the Map File
+
+Now that you understand how a Bible module works, you can start making a specification file. Ideally, you will be working from a digital text that can be manipulated (such as the example files on the GitHub site), but they can be typed in if there is only a printed model. Even with automagic processes, this can be a painstaking process. Whatever the method, it is best to do several passes to verify that no new errors are introduced. Don't be surprised if you find errors in your model text.
+!!!1.2.1: Front Matter
+
+Some of your front matter, such as a title page, copyright page and preface could be added to the specification file to streamline the later publication process. Obviously, one will need to consider the language used for each section. Generated fields like the table of contents (section ((Table of Contents|1.5.5: Table of Contents))) and indexes (section ((|: ))) are dependent on the final output and are better left to a desktop publishing tool later.
+----
+!!1.3: Setting up your Paratext Project
+
+Before starting to work with Bible Modules, you'll need to make sure that the project is ready. This involves configuring a few options and verifying that your project does not have missing or out-of place verse numbers.
+!!!1.3.1: Book Names
+
+Paratext allows users to customise the long names (toc1), short names (toc2), and abbreviations (toc3). While older versions of Paratext required manual editing of \toc (table of contents) markers at the start of each book, Paratext now collects all of this data in a dialogue box found under Project > Scripture Reference Settings > Book Names. For a lectionary, it is important to make sure that all books are configured, even if not included in your project.
+||TOC Levels|toc1|Long Name |The Gospel According to Matthew 
+|toc2|Short Name |Matthew 
+|toc3|Abbreviation |MAT ||{img src="https://raw.githubusercontent.com/erros84/PTManuals/master/images/tocchoice.png" class=img-responsive}Reference Options
+The option Cross References (\xt) use in this dialogue box determines not only how the \xt's look, but also the final format of $() references in Bible Modules. The three letter codes will be replaced with your choice of TOC1, TOC2 or TOC3. The option Parallel Passages References use (\r, \mr will cover any \r or related links.
+Generally, the more biblically literate the community, the shorter the  that can be used. TOC2 is likely a good compromise of succinctness and clarity for formatted Bible references.
+See Best practice for choosing abbreviations for book names in Paratext Help for more info about the abbreviations.
+{BOX(bg="#FFE6FF" width="60%")}
+Note: Even though these settings affect the $() formatted references in Bible Modules, the references (\ref) in Bible Modules must still follow English 3-letter abbreviations and punctuation.{BOX}
+!!!1.3.2: Chapter & Verse Check
+
+Your Paratext Bible books should be free of marker errors, especially those relating to chapters, verses, and markers. Use the built-in Chapter/verse and Marker checks to make sure that you have not skipped or repeated chapters and verses throughout your text. If one fails to do this, Paratext cannot be expected to import all of your text.
+* Click in your project window
+* Checking > Run Basic Checks
+* Check Chapter/verse numbers and Markers.
+* Uncheck any other checks.
+* If necessary, click Choose… and choose the book(s) you want to check
+* Click OK.''A windows appears with a list of the errors.''
+* Double-click a line in the list.
+* Correct the error in your project.
+* Double-click the next line in the list.
+* Continue for all the errors.
+* Click "Rerun" button to check that all the errors have been corrected.
+* Close the results list window.
+!!!1.3.3: Other Checks
+
+While this is not specific to Bible Modules, it is in the best interest of the project text to work through available Biblical terms, wordlists, spell-checking, parallel passages and punctuation checks that Paratext has.
+If you are interested in a guide through these tasks, there is a series of Paratext manuals available in English at (( https://lingtran.net/Paratext+8+Course+Manuals|https://lingtran.net/Paratext+8+Course+Manuals )) and French at (( http://outilingua.net/Paratext+8+Manuel|http://outilingua.net/Paratext+8+Manuel )). The Basic Checks are covered in several chapters of the Stage 1-2 Manual.
+!!!1.3.4: Biblical Terms
+
+Paratext has powerful tools to help you harmonise your Biblical key terms between passages and with your source texts. The Biblical terms tool works with only the text you have, so its use will not be greatly different whether translating portions or books.
+For details, please go to the site below and go to the chapter titled ''BT: A 4-Step process''.
+(( https://lingtran.net/Paratext+8+Stages+1+and+2|https://lingtran.net/Paratext+8+Stages+1+and+2 ))
+!!!1.3.5: Wordlist
+
+Paratext has powerful tools to help you to spellcheck texts in the target language. The Wordlist tool works with only the text you have, so its use will not be greatly different whether the team is translating portions or books.
+For details, please go to the site below and go to the chapter titled: ''Spell Checking''
+(( https://lingtran.net/Paratext+8+Stages+1+and+2|https://lingtran.net/Paratext+8+Stages+1+and+2 ))
+You may sometimes want to remove Bible Module books from your wordlist, especially if you have much text that is not in the target language. Use the feature: View>Set Scripture Range and deselect the XX books.
+!!!1.3.6: Parallel Passages
+
+Paratext can also allow you to compare similar or quoted passages across multiple books. The Parallel Passages tool works with only the text you have, so its use will not be greatly different whether the team is translating portions or books.
+For details, please go to the site below and go to the chapter titled: ''Compare Parallel Passages''.
+(( https://lingtran.net/Paratext%208%20Stages%203%20to%206|https://lingtran.net/Paratext%208%20Stages%203%20to%206 ))
+----
+!!1.4: Choosing a Publishing Path
+
+From Paratext, which requires a very uniform structure, there are many publishing pathways available.
+When choosing a publishing path for this project, there were some constraints. From a formatting perspective an appropriate publishing path should contain or allow:
+* repeatable replacement of "standard" Paratext styles with custom styles.
+* customisation of outputted text, including smart or manual pagination.
+* a customisable table of contents.
+* front and back matter.
+* running headers (headers automagically generated from page content).
+* conversion of custom  markers into visible formatting.
+* a minimal cost-to-effort ratio.
+For Bible modules that will be reused in multiple languages, the process needed to be repeatable with as little involvement from the technician as possible. An ideal publishing process would produce a new editable draft of a book for team revision and pagination in as little as 30 minutes.
+An added bonus would be that the language team (would not have to learn a new application to do this final pagination and read-through.
+After checking and pagination by the team, the document would need to be exported to a 
+Portable Document Format: a proprietary, yet widely supported document format developed by Adobe where content is "frozen" as if on a printed page. This format, which is generally non-editable, is an ideal way to ensure that formatting decisions are maintained, no matter the viewer or printer. It also prohibits the team from making changes that don't ever get put back into Paratext. by the technician to the specifications of our local print shop, as well as saving the printer the time of manual layout.
+The following sections will discuss the advantages and disadvantages of various publishing paths.
+!!!1.4.1: Print Draft (XeLaTeX)
+
+Print Draft is a feature of Paratext that exports books are quickly converted automagically (via a XeLaTeX
+XeLaTeX [['zilatɛk] is a derivative of LaTeX which is in turn a derivative of TeX, and each signify a system of laying out documents. The mixed capitalisation of this proper noun is intentional. compiler) into visually-pleasing  via a complex system of weights and measures.
+If your specification file contains only standard  codes, then Print Draft (see figure ) may work for you. If not, customising this output yourself is a veritable rabbit hole of learning and configuration, and there may be more fruitful uses of your time.{img src="https://raw.githubusercontent.com/erros84/PTManuals/master/images/PrintDraft.png" class=img-responsive}Print Draft Options
+Print Draft may work for some simple Bible Modules with no custom formatting.
+!!!1.4.2: Pathway
+
+Pathway is a product of  International whose effect is somewhere between Print Draft and Export to . It allows you to export to:
+* OpenOffice/LibreOffice
+* PDF via OpenOffice/LibreOffice
+* HTML5
+* Adobe inDesign
+* and other formats such as GoBible, TheWord, Sword, and MySword.
+With the powerful customisation of output formatting and easy repeatability of output, this is a viable option for modules less than a few hundred pages.
+Unfortunately, through no fault of Pathway, LibreOffice (and the Oracle equivalent OpenOffice) both choke on large documents. Any document over 300 pages may be painfully slow to edit and crash-prone. At least on Windows, this seems to stem from the fact that LibreOffice is limited to using 150 Megabytes of , no matter how much  or processing power your system has available, and using LibreOffice for a large document is the technical equivalent of filling a swimming pool with a garden hose.
+!!!1.4.3: RTF to LibreOffice
+
+See section ((Pathway|1.4.2: Pathway)) for an explanation as to why this was not feasible.
+!!!1.4.4: Publishing Assistant and inDesign
+
+Publishing Assistant is a companion tool to Paratext designed to bridge Paratext to your desired publishing tool. As stated on the  website: "distribution of Publishing Assistant does not take place without appropriate training and support ".
+Adobe inDesign is a professional-level book and document editing tool, and the go-to choice for many typesetters.
+!!!1.4.5: RTF and Microsoft Publisher
+
+Microsoft Publisher is a cousin of Microsoft Word, allowing many tasks that are more common in the publishing of a book. Publisher was considered by the authors, but it lacks the ability to do running headers based on embedded style information. This missing feature could have created hours of work for each publication of synchronising headers with content.
+!!!1.4.6: RTF and Scribus
+
+Scribus is a free alternative to inDesign that offers many advanced publishing features at the cost of an intimidating interface. An admittedly brief test showed that Scribus suffered the similar lack as Microsoft Publisher of running headers.
+!!!1.4.7: RTF to Microsoft Word
+
+Microsoft Word, even though it is better-suited for documents than books, is a mature tool that is more powerful than most users realise. As the reader will see in section ((“Typesetting” RTF through Word|1.5: “Typesetting” RTF through Word)), Microsoft Word contains all of the necessary features needed to prepare a complex document. One of these is running headers, that will save lots of work.
+One disadvantage of Word over a more professional typesetting tool is that there is no method for vertically aligning the lines of the front of the page with those on the back. For Bibles printed on the traditional thin paper, this would be a troublesome issue, but for Bible Modules be printed on standard paper, the effect of any such misalignment should be minimal.
+----
+!!1.5: “Typesetting” RTF through Word
+
+Based of the findings in section ((Choosing a Publishing Path|1.4: Choosing a Publishing Path)), Microsoft Word is ideal for typesetting. The following sections will guide you through the important steps
+The following steps assume a Windows© environment, as this is the only environment that can natively run Paratext and Microsoft Word. The following steps are based on Microsoft Word 2016, which is the most recent version of the application as of writing. in "typesetting", but many of the decisions will be up to you.
+!!!1.5.1: Export from Paratext
+
+Since we have chosen to do typesetting in Word, we need to get the text into a format Word can understand.  (Rich Text Format) is a standard format that almost any word processor can read.
+# Open your project in Paratext.
+# Navigate to the book containing your Bible module.
+# From the File menu, choose Save as ...
+# Verify that the correct XX book is chosen. {img src="https://raw.githubusercontent.com/erros84/PTManuals/master/images/ExportRTF.png" class=img-responsive}''The chapter defaults will be fine, as the whole Bible Module is Chapter one, verse zero.''
+# Click Save.
+# Choose a location and a file name and save this file.''It is probably best to create a new folder for this work.''
+!!!1.5.2: Convert RTF to DOCX
+
+While  can be read by Word,  files are sometimes an order of magnitude larger than the same file in the native Word format of .docx. Since this is currently a huge file, and Word is probably reacting sluggishly, we want to immediately re-save it as a .docx file.
+# Open the  File you saved in Microsoft Word
+# From the File menu, choose Save as.
+# Choose a location.
+# Choose a filename and verify that the file is being saved as Word Document (*.docx).{img src="https://raw.githubusercontent.com/erros84/PTManuals/master/images/docx.png" class=img-responsive}
+# Click OK.
+# Close Word and open the .docx file you just saved.''This should clear the large amount of your computer's memory that Word was using.''
+!!!1.5.3: Page Formatting
+
+Using Word's options, you need to set your page formatting.
+# From the Layout ribbon, choose Page Size.
+# Change the Page Size (if needed).''Booklets can use A5 or half-letter size (with the plan to print on folded A4/letter sheets).''
+# Change the Margins.''You can use margins of 0.5 inches on each side, with a 0.25 inch gutter.''
+!!!1.5.4: Unravelling Word Styles
+
+The formatting of every bit of text you see in Word is controlled by three factors, paragraph styles, character styles, and manual formatting.
+Paragraph styles, shown with a "¶" icon in the Styles window, are applied to a whole line (or paragraph). Paragraph styles can have custom fonts and styles, but most often define horizontal alignment, line spacing, tabs, and spacing before and after. A single line can only be marked with one paragraph style, so you cannot mark some text on a line as Heading 1 and other text as Heading 2.
+Character styles, shown with an "a" icon in the Styles window, are applied to a string of characters. Prototypical character formatting consists of fonts, bold, italic, underline, subscript or superscript. A single line of text can be marked with several character styles, but they cannot overlap. You can mark some text on a line as Bold and other text as Italic.
+Manual formatting is the least predictable, as it is added by the user and leaves no record, and overrides the styles. Fortunately, it is easy to remove. To clear all manual formatting or the manual formatting applied to a single line, select the text and press Ctrl + Space .
+Because of the method that is used to export to , every element in your document will be helpfully marked with paragraph and character styles named after the  markers you used in the Bible Module. For example, each \r marker is listed in the styles as the paragraph style r, and some text may be marked with an it character style for italic.
+In most cases, this means that (after clearing manual styles) you only need to reformat each style of object once, and it will affect the whole document, and this is wonderful news.
+!!!!1.5.4.1: Your Stylesheet Command Centre
+
+You need to set up word for customising styles:
+# First, you need to open the Styles window. Go to the Home ribbon and click on the {img src="https://raw.githubusercontent.com/erros84/PTManuals/master/images/restoresm.png" class=img-responsive} icon below the list of styles.{img src="https://raw.githubusercontent.com/erros84/PTManuals/master/images/stylewin.png" class=img-responsive} ''The styles window will open. You may want to drag this window to the left or right and dock it.''
+# The style window shows well over 100 styles and we don't need to see styles not used in the document. 
+# Click the Options link in the bottom right of the styles window.
+# From the Select styles to show: drop-down, select "In use". ''Now Word only shows the styles used in your document.''
+# You now need to open the Style Inspector window. Click the style inspector button in the style window. {img src="https://raw.githubusercontent.com/erros84/PTManuals/master/images/open%20Style%20Inspector.png" class=img-responsive}''This will open the Style Inspector window. You may want to drag this window to the left or right and dock it.''
+# (Some of these set-up steps may need to be repeated the next time you open Word.)
+Now we are set up to inspect and change each style.
+Click on any text in the document, and the Style Inspector will helpfully show the paragraph and character-style names of this text, as well as a summary of the included formatting.{img src="https://raw.githubusercontent.com/erros84/PTManuals/master/images/inspecting.png" class=img-responsive}The Style inspector window.
+You can see that this text's paragraph style is r - Heading - Parallel References and the character style is it...it* - Character - Italic Text. If we wanted to right-align all \r references, we would need to click on the paragraph style and click Modify.{img src="https://raw.githubusercontent.com/erros84/PTManuals/master/images/modstyle.png" class=img-responsive}Modifying a particular style
+
+This brings you to the Modify Style dialogue box. From this window, you can see everything that is configured for this style, or make changes.{img src="https://raw.githubusercontent.com/erros84/PTManuals/master/images/modstywin.png" class=img-responsive}The Modify Style dialogue box
+
+As you can see, many options can be configured directly in this window. Some of the most useful here will be horizontal alignment (left, centre, and right), bold, and italic.
+Others can be configured through the Format button, see figure .{img src="https://raw.githubusercontent.com/erros84/PTManuals/master/images/formatmenu.png" class=img-responsive}Format Categories
+!!!!1.5.4.2: Styles: Font
+
+This dialogue probably does not need to be explained, but you will use this dialogue to customise the fonts of your Bible Module. In vernacular publishing, your first priority will be to choose fonts that are easily readable and contain all of the characters needed in each language. After that, you can choose fonts and styles that suit your needs.
+For titles, you'll want to find fonts and styles that establish a visual hierarchy . Focus on larger and bolder fonts for more important things. Usually sans-serif fonts are best for headings.
+Serif fonts are usually best for paragraph text, and the size of the text font will practically determine the length of your publication.
+Following conventional wisdom, try to keep the number of fonts on each page to three or less.
+!!!!1.5.4.3: Styles: Paragraph Indents and Spacing
+
+Clicking on the Paragraph option brings up...unsurprisingly...the paragraph dialogue box. Both tabs of this dialogue determine spacing around and inside a paragraph.{img src="https://raw.githubusercontent.com/erros84/PTManuals/master/images/paragrab.png" class=img-responsive}Paragraph Window
+The relevant options and their utility for this process are discussed below.Alignment:Left, Right, Centre and Justify. Paragraph text should probably be set to Justify
+Word's justification and hyphenation algorithms are somewhat less sophisticated than those used in inDesign, and this is one place where inDesign may have been a better choice. In narrow columns of text, Word's justification may exhibit a "river" effect of white space. to avoid ragged right edges. Note that justification is affected by the hyphenation setting in section ((Styles\: Language|1.5.4.6: Styles: Language)).Outline Level:This option is critical if you want to add a table of contents. Styles can be added to the automagic table of contents in this way.Indentation > Left and Right:Indentation adds (or subtracts) horizontal space on the left or right or a paragraph beyond the page margins.Indentation > Special:This option allows you to change the margins of the first or subsequent lines of each paragraph.Spacing > Before and After:This option determines vertical space before and after a paragraph, and is affected by the latter. Don't add space between option.Spacing > Line Spacing:Line spacing controls the space between lines of the same paragraph. It should be noted that the units are lines (default values centre around 1), and this field can be configured up to 2 decimal places. Like font size, configuring this field can have a huge influence on the number of pages in your final document.Don't add space between paragraphs of the same style:This configures whether the space between paragraphs of the same style follow Before and After Spacing (unchecked), or Line Spacing (checked)
+!!!!1.5.4.4: Styles: Paragraph Line and Page Breaks
+
+You may need to control spacing and pagination according to predictable patterns in the styles.
+# From the Modify Style menu on s2, click on the Format button, and choose Paragraph.
+# In the Paragraph dialogue, click the Line and Page Breaks tab.
+# Select the desired option.
+It should be noted that there are other interesting options here, sorted by order of importance.Page break beforeOften checked by default, this option ensures that Word will try to keep a single line of paragraph text from showing up at the top of a page. Use this for the style of the first element that appears on each page, s2 in the example files. It is also useful for each section title, s1.Widow/Orphan controlOften checked by default, this option ensures that Word will try to keep a single line of paragraph text from showing up at the top of a pageKeep with nextThis option will tell Word that the current paragraph should not be separated by a page break from the following paragraph. This can be particularly useful to make sure that titles don't get separated from the text that they title.Keep lines togetherThis option is more powerful than Widow/Orphan control, and forces the current paragraph to appear on the same page. It's probably best to avoid this, except in the case of long titles.Don't hyphenateThis is only relevant for major languages that Word knows how to hyphenate. If you find that Word is trying to hyphenate your vernacular text, turn this off
+!!!!1.5.4.5: Styles: Border
+
+If you want lines before or after certain types of paragraphs, you can choose the border style and location from the Border dialogue box. Simply choose the desired Style and Width, and then click where you want to add the border in the mock-up to the right.{img src="https://raw.githubusercontent.com/erros84/PTManuals/master/images/borders.png" class=img-responsive}Border dialogue box
+The spacing between the border and the text is actually determined by configuring the space before or after the paragraph. See section ((Styles\: Paragraph Indents and Spacing|1.5.4.3: Styles: Paragraph Indents and Spacing)).
+!!!!1.5.4.6: Styles: Language
+
+The Language dialogue box contains 2 sections related to spelling checking. For sections written in majority languages, selecting the language (if Word doesn't automatically recognise it) will allow you to do spelling and grammar check this content (this content was not checked by Paratext wordlists and checks). For sections in the vernacular, selecting Do not check spelling or grammar will alleviate the annoyance of excess squiggly lines.
+!!!1.5.5: Table of Contents
+
+You will probably want a table of contents for your document. By default, word will create the Table of contents based on Heading 1, 2 and 3 (which you don't have). Nevertheless, if things are set up properly, you will be able to do this using the headings that were inserted from the  file.
+Put your cursor where you want to add a Table of Contents (TOC). From the References ribbon, choose Custom Table of Contents... .
+The main dialogue gives very basic print and web preview, as well as basic options. From the Tab leader option, choose dots, dashes or lines to help the reader connect the title and page number.
+The Modify dialogue box gives you access to modify the final formatting of the entries in the table of contents. These styles are listed as TOC1, TOC2, etc. You could modify them here (the most important parts will be the Line spacing, Before, and After from the Format > Paragraph dialogue, or from the Stylesheet Command Centre (see section ((Your Stylesheet Command Centre|1.5.4.1: Your Stylesheet Command Centre))).
+What interests us most is the Options window. You will see a list of all of your document's paragraph styles (but not character styles). As mentioned before, Headings 1-3 are the default styles for a table of contents, but you can change this. Remove the numbers beside the headings and choose the styles you wish to include in your . Add a 1 for the most major heading, 2 beside the next one, and 3 for the third. Notice that you can double-assign numbers to combine two styles into one level.
+Click OK to create the table of contents. If you are only creating a monolingual table of contents, you may be done.
+However if you added styles for national language translations to your , you may have a needless repetition of the same page numbers. If you want to clean this up, you can remove these page numbers, but unfortunately not from the interface, you need to dive into field codes
+All I ever learned about  fields, I learned here:
+(( http://www.techrepublic.com/article/use-words-toc-field-to-fine-tune-your-table-of-contents/ |http://www.techrepublic.com/article/use-words-toc-field-to-fine-tune-your-table-of-contents/  )).
+Click in the new  and press ALT + F9. This will show you a cryptic field code that defines the options of your .
+To remove a single level's numbering, first find the heading number following the desired style (i.e. 2). Add \n 2-2 in the space between \z and \t
+Oddly, the \n option only accepts a range (i.e. 1-3, 2-4), so \n 2 is not valid, but 1-1 or 2-2 are both valid ranges for one item..{img src="https://raw.githubusercontent.com/erros84/PTManuals/master/images/Inside%20a%20TOC.png" class=img-responsive}Inside a Table of Contents Code
+# Marks this field as a  (required).
+# Makes each entry a hyperlink (recommended).
+# Hides leaders in web view.
+# Removes page numbers (and leaders) from level 2 (through 2).
+# Marks that Styles will be used instead of Headings.
+# The first style name.
+# The heading level of the first style.
+# The second style name.
+# The heading level of the second style.
+# The third style name.
+# The heading level of the third style.
+After editing the field, click inside the grey field and press ALT + F9 again to check your work.
+!!!1.5.6: Headers and Footers
+
+In a book, headers and footers can be quite complex. Page numbers start and restart in some sections. Some pages are meant to exclude page numbers and chapter titles and page numbers. Headers and footers may need to move to the left or right on alternating pages. Word can handle each of these situations, but it may take some fiddling.
+!!!!1.5.6.1: Running Headers
+
+To help the reader, you may desire to show headers that show the current season and day. For example, we chose to use the day and season names as headers in a lectionary. As discussed in section ((RTF to Microsoft Word|1.4.7: RTF to Microsoft Word)), Word can do Running Headers. This means that Word can automagically pull the most recent occurrence of a style and copy it into the header. See figure  for an example layout.{img src="https://raw.githubusercontent.com/erros84/PTManuals/master/images/header.png" class=img-responsive}Example layout for running headers
+# Double click in the header.
+# Check the Different Odd and Even Pages option
+If you zoom out, there is some weirdness with Print Layout mode in word, and it likes to show page one and two side by side, which will not be the case when printing. This caused some headaches until I learned not to trust Word. This is discussed here:
+(( https://superuser.com/questions/46782/two-page-view-in-word-shouldnt-the-first-page-be-on-the-right|https://superuser.com/questions/46782/two-page-view-in-word-shouldnt-the-first-page-be-on-the-right )).
+# From the View ribbon, check the box beside Ruler.
+# Click the {img src="https://raw.githubusercontent.com/erros84/PTManuals/master/images/tabby.png" class=img-responsive} icon to the left of the ruler several times until it becomes a right tab ({img src="https://raw.githubusercontent.com/erros84/PTManuals/master/images/tabbyrt.png" class=img-responsive}).
+# Click on the ruler near the right margin and drag until the cursor lines up with the right margin (clicking where you want to put it will not work, but this does).''This should give this result: ''{img src="https://raw.githubusercontent.com/erros84/PTManuals/master/images/tabbed.png" class=img-responsive} .
+# Put the cursor at the start of the line.
+# Insert > Quick Parts > Field.
+# From the Field names box, choose StyleRef.
+# From the Style name: box, choose the style you want to insert
+The Search from bottom of page to top option could be useful on the right page, as in the headwords of a dictionary..
+# Click OK.
+# Press the Tab key.
+# Repeat steps 7-10 for the second style.
+# Go to the next page, and repeat steps 3-12 with the styles in reverse.
+!!!!1.5.6.2: Hiding Headers and Footers on Some Pages
+
+Usually the first page of a chapter does not have page numbers, and the example documents start new "chapters" at every season. To accomplish this, you will need to insert a Section Break before each chapter (in this case, season). If you have previously added a page break to this style, you may need to remove it.
+# Double-click on the header of the document.
+# Check the Different First Page option.
+# Scroll or search to find your first chapter, or the section after your Front Matter.
+# Enable show hidden characters (¶) from the Home ribbon.
+# Add a Next Page Section break from Insert > Break > Next Page Section Break.
+# You may have to repeat some of these steps in each section's header.
+If you want to leave the headers on seasons, but find that the most recent Holy Day "bleeds" onto the first page of the next season, there is a workaround.
+# On each Season page, add an empty new line and format it with the same Paragraph format that is used for Season headings.''The heading will disappear from the header.''
+# If this empty line is inconspicuous, you may leave it. Otherwise, use Word's Hidden Text option.
+# The Hidden option is listed among the Effects in the Font dialogue.
+# Alternately, you can add a Hidden Text button to the quick access toolbar.
+Microsoft provides instructions here:(( https://support.office.com/en-us/article/Add-commands-to-the-Quick-Access-Toolbar-f733e1a6-53b1-4388-a609-173d03895ab|https://support.office.com/en-us/article/Add-commands-to-the-Quick-Access-Toolbar-f733e1a6-53b1-4388-a609-173d03895ab ))
+!!!!1.5.6.3: Page Numbers
+
+You will most likely want to add page numbers. Choosing to centre them at the bottom of the page will greatly simplify things as you won't have to bother with moving them to the left and right like headers for facing pages. Page numbers can be added from the Insert ribbon, and you will be able to choose the placement.
+!!!1.5.7: Text Decorations
+
+If you add a marker such as \p --- in your Bible Module specification, you can replace it with an actual line using this trick
+If you want different thicknesses of lines in different places, you can use different numbers of dashes (3,5,7, etc.). Just make sure to replace the longest sets of dashes first, or you might make some mistakes.:
+* Open a new Word document.
+* Insert > Shape > Line.
+* Draw on the page to create a horizontal line (holding Shift while drawing will force the line to 45° increments).
+* Click on the line.
+* Format > Shape outline
+* Choose a Colour.
+* Choose a Weight.
+* Choose a dash pattern (if desired).
+* Select and copy the line to the clipboard.
+* Return to your main document.
+* Home > Replace.
+* Put ---, or whatever you used in the Find what field.
+* Type ^c into the Replace with field (this code means "contents of the clipboard"
+There are lots of useful codes under the Special button. Take this time to check them out.).
+* Click Replace or Replace All.''If all went well, each instance will be replaced with a line.''
+!!!1.5.8: Pagination
+
+Pagination refers to how the text falls on each printed page. At this point, we go beyond the global style changes of previous sections and into the realm of manual changes to specific sections. Any changes that modify space (page size, margins, headers, footers, styles or content) should be completed before this stage, or you will have to do this again.
+You should have already activated widow and orphan control for paragraphs, marked titles with Keep with next, and set a page break or Next page section break before the start of each new section (see section ((Styles\: Paragraph Line and Page Breaks|1.5.4.4: Styles: Paragraph Line and Page Breaks))). If so, Word has processed your document to avoid single lines jumping to the next page, but you can do better manually. The goal of this task is to make sure that titles and text break at natural points, for titles to directly precede the text they title, and without lines being sent awkwardly to the next page. This section is a course in Smushology
+Smushology: The art of compressing and expanding text to change pagination without it being noticeable. Yes, this is a made-up term..Rule 1: WorkflowWork from the top of the document to the bottom. This will save you work.Rule 2: Occam's RazorOnly change the things you need to, and make the slightest changes possible to achieve your goals.Rule 3: Sphere of influenceMaking a minor change to a large block of text is less obvious than making a drastic change to a small section of text.Rule 4: FlowUse line and inter-paragraph spacing if possible to move lines from one page to another. Only use kerning if absolutely necessary. Don't ever change font size between paragraphs or inside a paragraph.Rule 5: Image ProportionsDon't distort the proportions of photos, ever! Shrink or crop the image instead.Rules of Smushology
+Since your document probably contains page breaks (see section ((Styles\: Paragraph Line and Page Breaks|1.5.4.4: Styles: Paragraph Line and Page Breaks))), minor changes to each section only affect the placement of later sections of the document if they add or remove a page. For example, adding a line in one section shouldn't bump the next section down a line. Taking advantage of this will greatly limit the pagination changes that need to be made.
+!!!!1.5.8.1: Blank Pages
+
+You may want to add blank pages to your document, and this can be done by inserting Page breaks or Next Page Section Breaks available under Layout > Break.
+You may also want to start text on the right page for new sections
+If you zoom out, there is some weirdness with Print Layout mode in word, and it likes to show page one and two side by side, which will not be the case when printing. This caused some headaches until I learned not to trust Word. This is discussed here:
+(( https://superuser.com/questions/46782/two-page-view-in-word-shouldnt-the-first-page-be-on-the-right|https://superuser.com/questions/46782/two-page-view-in-word-shouldnt-the-first-page-be-on-the-right ))This is possible using Even Page and Odd Page section breaks available under Layout > Break.
+!!!!1.5.8.2: Removing or Adding Space Manually
+
+This is the most obvious method of Smushology, one can remove empty lines or combine contiguous lines of text to save space. Remember that you cannot combine two paragraph different styles on one line. Also, avoid combining headings that are used in the headers.
+Alternately, one can add lines or page breaks (Ctrl + Enter inserts a page break at the cursor, use this instead of pressing enter several times). If you want to move text to a new line but not create a new paragraph, use Shift + Enter to insert a line break. This is recommended for splitting long titles at a convenient place.
+!!!!1.5.8.3: Line Spacing
+
+As stated in rule 3 of figure , slight tweaks in line spacing over a large enough swath of text can move a few lines of text from one page to another. Try selecting a whole reading and tweaking the line spacing incrementally. In practise, changes of ±0.05 lines won't be noticeable to the untrained eye, but start with increments of 0.01 and work your way up until you get the desired result.
+!!!!1.5.8.4: Kerning and Spacing
+
+Kerning refers to the spacing between letters, especially letters that overhang or underhang one another (notice the difference in spacing between "AV" and "AV"). Enabling kerning (found under Fonts > Advanced) will compress text, but only in places that make visual sense. Spacing has much less finesse, and can get crowded beyond compression of 0.1 pt or overly stretched beyond expansion of 0.3pt. It is best only to use this method to make headings fit on one line, as excessive compression makes the text harder to read.
+!!!1.5.9: Cover Art
+
+Using available software tools, create a  of the front cover, spine and back cover. Your printer may want these elements created in separate files, as the width of the book's spine is currently unknown. Depending on your desire and budget, this could be done in Word, Publisher, or Photoshop.
+----
+!!1.6: Printing the Bible Module
+
+If you have a local print shop, you may need to prepare the book to their specifications, or risk getting an unsatisfactory result. The safest method, to avoid introducing font and layout issues, is to create a properly formatted  that the printer can easily print and bind. Without getting too far into bookbinding lore and legend, there are (at least) 2 major methods of binding a large book. One is a "perfect binding" and the other is "saddle stitching"
+There is a good discussion of the trade-offs between the two methods at (( https://www.paperspecs.com/paper-news/the-dilemma-stitch-or-glue/|https://www.paperspecs.com/paper-news/the-dilemma-stitch-or-glue/ )), along with some explanatory images.. The next sections will explain how to create the  for each of these two methods.
+!!!1.6.1: Create s for Perfect Binding
+
+With perfect binding, a stack of loose (or folded) sheets is essentially glued to the binding with heated glue. This method produces a flat-lying book, but is more expensive as it requires special machinery. All you probably need to provide to the printer for perfect binding is a sequential  (page 1, page 2, page 3, page 4) on the right paper size and a rather large internal margin. This can be done in Microsoft Word very easily. Simply set your margins appropriately, and export (or print) the document to .
+If the printer wants to use folded sheets, you'll need another layout that is beyond the scope of this paper.
+!!!1.6.2: Create s for Saddle Stitching
+
+A cheaper binding option is "saddle stitching", where a stack of booklets are stitched (or stapled) into the binding. Each booklet is made up of a few leafs (sheets) or paper. Breaking up the pages into multiple groups allows the printer to combine them into a squarish binding. Larger booklets require less stitching, but incur a growing "creep" where the stack of pages inside the booklet make the internal and external margins wander. Thicker paper worsens this effect. For the a large Bible Module (a lectionary), we settled on booklets of no more than 8 sheets of A4 paper, and as we printed on both sides of the page, this meant a maximum of 32 A5 pages per booklet. (Due to the genius of A4 is exactly twice the size of A5 paper.)
+Simply enabling the Booklet option in Word would have printed a copy of the book where the first and last pages are on facing sides of the same sheet. Now imagine neatly folding seventy sheets of paper into one booklet, and you will see why this is a problem. What was needed were individual booklets for small sets of pages. Booklet one would contain pages 1-32, booklet two would contain pages 33-64, and so on. How can one create this?
+!!!!1.6.2.1: PDFDroplet
+
+PDFDroplet is wonderfully simple booklet creation tool from  and Palaso. Simply open a sequential  file, choose a paper size and layout, and export a booked  that can be printed immediately and folded. You can even export the file as a mirror image, which is a useful step for some printers. To prepare each section, you first have to "print" or export a  from the sequential  for booklet one (pages 1-32), export a  for booklet 2 (pages 33-64), and so on.
+In Microsoft Word:
+# From the File menu, choose Export.
+# Create /XPS document.
+# Click Options.
+# Choose the page numbers to export in the Page Range section.{img src="https://raw.githubusercontent.com/erros84/PTManuals/master/images/pages.png" class=img-responsive}
+# Click OK.
+# Click Publish.
+# Repeat for next batch of pages until done.
+It was a repetitive process that took a while, but it saved us days of manual layout by the print shop manager. The next step was to create a non-mirrored booklet  of each file for the final mock-up and a mirrored copy for the final print process.
+# Open PDFDroplet.
+# Open the sequential  you just created or drag and drop the file into the PDFDroplet Window.
+# Choose Booklet.
+# Save the new  for printing.
+# If desired, create a mirrored copy for the print shop.
+Copy these files to a  key and send them off to the print shop.
+!!!!1.6.2.2: PDFBooklet
+
+PDFBooklet
+PDFBooklet is available at (( http://pdfbooklet.sourceforge.net/|http://pdfbooklet.sourceforge.net/ )). There are some bugs in this open-source software, but the developer is quite responsive and immediately solved a recent bug that found by the author. is an alternative that was found after the second book was printed. What it lacks in smooth interface and simplicity, it makes up for in complex manual control. The most interesting feature is "Leafs in a booklet", which allows the user to choose the number of pages in each mini-booklet, and the software orders the pages accordingly in the output. This can be a time-saver if the files come out right.
+# Print or export a normal sequential  from Word.
+# Open PDFBooklet.
+# Open the sequential  you just created.
+# Choose the number of leaves in a booklet.
+# Click Go and check your output.
+# If desired, create a mirrored copy for the print shop.
+If all went well, you now can pass this output to the printer.
+!!!1.6.3: Proofing the Mock-up
+
+Stop the presses! You're not done yet. Once the printer returns with the mock-up, now is the time for the final review to make sure that no new errors were introduced by the printing process. The team may find other errors as well, and this is the last chance to fix them, and you may have to re-do the booking if you find errors. Take the time to review it carefully.
+!!!1.6.4: Final Printing
+
+Congratulations! Now you're there. Sit back and wait for the final printing.
+----
+!!1.7: Printing the Same Bible Module in another language
+
+This process was designed to be repeatable with minimal effort the second and third time around. If we look back, the tasks that took the most time were sections ((Creating a Paratext Bible Module|1.1: Creating a Paratext Bible Module)) and ((“Typesetting” RTF through Word|1.5: “Typesetting” RTF through Word)). This section shows you how to recapture some of the work done above for later books, and even for other language projects.
+!!!1.7.1: Saving a copy of your Bible Module for Sharing
+
+As discussed in section ((Creating a Paratext Bible Module|1.1: Creating a Paratext Bible Module)), a Bible module is similar to a Shell Book. You can now take your completed Bible module and share it with other projects. You just need to collect a file from your computer.
+* In Paratext 8, Bible Modules are stored in your Paratext 8 Projects folder, usually C:\My Paratext 8 Projects\_Modules. If you have made modifications to the module after importing it, the latest copy will be found under C:\My Paratext 8 Projects\[[Your Project]\modules.
+* In Paratext 7, the Bible Modules are stored in your Paratext Projects folder, usually C:\My Paratext Projects\modules. If you have made modifications to the module after importing it, the latest copy will be found under C:\My Paratext Projects\[[Your Project]\modules.
+Simply copy the  file of your Bible Module, or an earlier version with national language content to a computer with the new project. You can now follow the first steps in section ((Creating a new Bible Module|1.1.2: Creating a new Bible Module)) and choose the option Copy from specification file.
+!!!1.7.2: Rebuild Styles from a Previous Document
+
+Microsoft doesn't heavily advertise this, but Microsoft Word's .docx format is actually a zip file containing all of the text, metadata, and attachments in a reasonably accessible format. This is why it was suggested in section ((Convert RTF to DOCX|1.5.2: Convert RTF to DOCX)) to convert to .docx and it can be now used to our advantage.
+Using a compression tool such as 7-Zip
+A free and open-source compression tool for Windows that is an alternative to WinZip, WinRar, and other similar tools. Available at (( http://www.7-zip.org/|http://www.7-zip.org/ ))., one can swap out elements of a document, including style sheets
+It should be noted here that this is an unsupported method which in our case offers a shortcut. Normally, this would not work, but all files created from Paratext using the same  markers will contain the same list of styles. The supported method of copying styles is explained here: (( https://www.extendoffice.com/documents/word/1004-word-import-styles.html|https://www.extendoffice.com/documents/word/1004-word-import-styles.html )) .. This means that ''nearly all'' of the style customisations that you made to the document can be copied between documents.
+# Install 7-Zip, as well as the suggested shell extension.
+# Be sure that Microsoft Word is closed.
+# Right-click on a .docx file and choose 7-Zip > Open Archive.{img src="https://raw.githubusercontent.com/erros84/PTManuals/master/images/7zipopen.png" class=img-responsive}
+# Open the word folder.{img src="https://raw.githubusercontent.com/erros84/PTManuals/master/images/inside%207zip.png" class=img-responsive}
+# Drag the styles.xml document of your completed Bible Module from 7-Zip out to a temporary location on your hard drive.{img src="https://raw.githubusercontent.com/erros84/PTManuals/master/images/insideword7zip.png" class=img-responsive}
+# Repeat steps two and three with your target document.
+# Drag the styles.xml document of your completed Bible Module into the newly exported .docx file.
+# Close __7-Zip__ and open the Word document with the newly replaced stylesheet.
+# If all went well, you have just skipped the steps in sections ((Page Formatting|1.5.3: Page Formatting)) and ((Unravelling Word Styles|1.5.4: Unravelling Word Styles)), and your document will have identical formatting to the previous one.
+# You still need to troubleshoot your document's pagination, see section ((Pagination|1.5.8: Pagination)).!Module

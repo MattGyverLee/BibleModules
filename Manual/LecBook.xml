@@ -1,0 +1,3580 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE xlingpaper PUBLIC "-//XMLmind//DTD XLingPap//EN"
+"XLingPap.dtd">
+<xlingpaper
+version="2.24.0"
+><styledPaper
+><lingPaper
+automaticallywrapinterlinears="yes"
+version="2.28.0"
+><frontMatter
+><title
+>Paratext Bible Modules</title
+><subtitle
+>Building and Publishing Bible Modules</subtitle
+><author
+>Doug Higby</author
+><affiliation
+><abbrRef
+abbr="vSIL"
+></abbrRef
+> International Language Technology Use Coordinator</affiliation
+><author
+>Matthew Lee</author
+><affiliation
+><abbrRef
+abbr="vSIL"
+></abbrRef
+> Cameroon</affiliation
+><presentedAt
+>EMDC 2019<br
+></br
+>De Betteld, The Netherlands</presentedAt
+><date
+>April 2019</date
+><contents
+showLevel="4"
+></contents
+></frontMatter
+><part
+id="p1"
+><secTitle
+>Module</secTitle
+><shortTitle
+>Module</shortTitle
+><chapter
+id="c1"
+><secTitle
+>The Nerdy Bits</secTitle
+><shortTitle
+>Nerd</shortTitle
+><p
+>This module is intended to guide a moderate-to-advanced user through creating and publishing a Bible Module through Paratext.</p
+><section1
+id="sCreateBM"
+><secTitle
+>Creating a Paratext Bible Module</secTitle
+><p
+>According to Paratext help, a Bible module "brings together text selections from a Paratext project <citation
+paren="citationBoth"
+ref="rPT7"
+></citation
+>". A Bible module consists of a specification file (or skeleton) containing literal text and verse references to be imported from a Paratext project. This section is intended to cover the basic needs of any Bible module, and not just lectionaries. As with documentation of any programming language, this section will be necessarily technical.</p
+><p
+>You can think of a Bible Module as a Biblical shell book, where all of the verses are automagically<endnote
+id="nautomagic"
+><p
+>This is a favourite word that (for the author) can be traced back to a warning at Disney World: "Caution, doors open automagically!"</p
+></endnote
+> imported. Once imported, any remaining text in the specification file can be translated into the vernacular to create a new vernacular book.</p
+><p
+>Bible Modules are a relatively unknown yet powerful Paratext feature that could use some detailed description. Bible modules can be storybooks with included Biblical text, such as the Lives of the Prophets story series. They could be Bible study or Sunday School materials that pull heavily from Bible Text.</p
+><p
+>Let's define some key terms:</p
+><dl
+><dt
+><abbrRef
+abbr="vUSFM"
+></abbrRef
+> -</dt
+><dd
+>- Unified Standard Format Markers<endnote
+id="nUSFM"
+><p
+>Full documentation and history of <abbrRef
+abbr="vUSFM"
+></abbrRef
+> are available at <link
+href="https://ubsicap.github.io/usfm/master/index.html"
+>https://ubsicap.github.io/usfm/master/index.html</link
+> . The latest version of <abbrRef
+abbr="vUSFM"
+></abbrRef
+>, as of writing, is <abbrRef
+abbr="vUSFM"
+></abbrRef
+> 3.0, from April 2019.</p
+></endnote
+> (often referred to as "markers" or "SFM markers") are "a notation for identifying the components and structure of an electronic document <citation
+paren="citationBoth"
+ref="rUSFM"
+></citation
+>" that are a standardised subset of <abbrRef
+abbr="vSFM"
+></abbrRef
+> markers used for purposes beyond Bible Translation such as dictionaries. <abbrRef
+abbr="vUSFM"
+></abbrRef
+> consists of a set of various open-ended markers (such as \p for paragraph or \v for verse) and closed markers (such as \ft and \ft* for bold). The vast majority of markers mark structural or functional features of a document, and a few, no doubt bending to the desires of users, mark formatting features such as bold and italic.</dd
+><dt
+>Specification File -</dt
+><dd
+>A Specification File is a <abbrRef
+abbr="vUSFM"
+></abbrRef
+> file that contains the static content of a Bible Module intermixed with Bible references. This file, with an <object
+type="ttyped"
+>.SFM</object
+> extension, is the file that should be shared (see section <sectionRef
+sec="sSaveShareModule"
+></sectionRef
+>) when sharing a Bible module to another project.</dd
+><dt
+>Bible Module -</dt
+><dd
+>Though this is probably not a hard-and-fast definition, the authors will use Bible Module to refer to the combination of a specification file and a project.</dd
+></dl
+><section2
+id="sExtraBooks"
+><secTitle
+>Extra Books</secTitle
+><p
+>Each Paratext project has eight extra multi-use books, XXA through XXG, that can be used for content beyond Front Matter, Back Matter, Glossaries, and actual Bible books (each of these has a dedicated book). If your project already uses one or more of these XX books, you can choose another one to add your Bible Module.</p
+><p
+>While the number of books is limited, there is no need to keep unused Bible Modules in your project, and so it is possible for each individual XX book to consecutively, but not concurrently, host different Bible Modules. It may be useful at this point to find out which XX books are already in use in your target project.</p
+></section2
+><section2
+id="sBlankMod"
+><secTitle
+>Creating a new Bible Module</secTitle
+><p
+>Let's get started! The first thing you'll need to do is to connect one of your Extra books to a Bible Module.</p
+><ol
+><li
+>Click to activate your translation project.</li
+><li
+>From the <object
+type="menu"
+>Tools</object
+> menu, choose <object
+type="menu"
+>Open Bible Module</object
+><br
+></br
+><object
+type="tItalic"
+>The following dialogue box will open:</object
+><br
+></br
+><img
+src="images/Open%20Bible%20Module.png"
+></img
+></li
+><li
+>Select the empty Extra Book you want to use for your Bible module.</li
+><li
+>From this dialogue box, you have 3 options, choose according to your situation: <ol
+><li
+><object
+type="menu"
+>Copy from a specification file</object
+>: Choose a predefined Bible Module from your <object
+type="ttyped"
+>_Modules</object
+> directory in <object
+type="ttyped"
+>My Paratext 8 Projects</object
+> and copy it to your project directory where you will be able open and customize it.</li
+><li
+><object
+type="menu"
+>Open existing module</object
+>: Choose from the modules that you have already copied or started from scratch in your project.</li
+><li
+><object
+type="menu"
+>Create new specification file</object
+>: Create a new, empty module that you will define in Paratext.</li
+></ol
+></li
+></ol
+><framedUnit
+framedtype="ftPink"
+><p
+>Note: Whatever option you choose, the new file will be created or copied into your <object
+type="ttyped"
+> _Modules</object
+> folder. Any customization made from this point will be made only in the copy inside your folder.</p
+></framedUnit
+></section2
+><section2
+id="sViews"
+><secTitle
+>Four Views of Bible Modules</secTitle
+><p
+>When working in a Bible Module, Paratext will replace the four standard views available on the <object
+type="menu"
+>View</object
+> menu with a new set of views. Note that only <object
+type="menu"
+>Unformatted Specification</object
+> and <object
+type="menu"
+>Standard Specification</object
+> are editable. Below is an explanation of the four Bible Module views.</p
+><dl
+><dt
+>Unformatted Specification:</dt
+><dd
+>This is an editable no-frills view with no formatting and no marker pop-ups. This can be nice for working with bulk changes. Special codes such as <object
+type="ttyped"
+>\ref</object
+> and <object
+type="ttyped"
+>$()</object
+> will have no effect in this view and will show up as these literal codes.</dd
+><dt
+>Preview Output:</dt
+><dd
+>This read-only view gives a "print preview" of how your Bible Module will look when exported. It uses standard formatting used for text marked with each <abbrRef
+abbr="vUSFM"
+></abbrRef
+> marker, and the markers themselves are hidden. The <object
+type="ttyped"
+>\ref</object
+> code will be replaced by current text imported from the Bible books and references marked with <object
+type="ttyped"
+>$()</object
+> appear with vernacular names and formatting based on the settings in <object
+type="menu"
+>Project</object
+> &gt; <object
+type="menu"
+>Scripture Reference Settings</object
+>.</dd
+><dt
+>Standard Specification:</dt
+><dd
+>This editable view is a combination of the preview and specification files. Static text will be shown in an appropriate font and style, but all <abbrRef
+abbr="vUSFM"
+></abbrRef
+> markers will show up as coloured<endnote
+id="nColors"
+><p
+>Markers that are valid in this specific context will show up in <object
+type="green"
+>green</object
+>, and invalid markers will show up in <object
+type="red"
+>red</object
+>.</p
+></endnote
+>markers that can be edited. Special codes such as <object
+type="ttyped"
+>\ref</object
+> and <object
+type="ttyped"
+>$()</object
+> will have no effect in this view and will show up as these codes. Most work will be done in this view, as the colours give useful feedback while working with your Bible module.</dd
+><dt
+>Standard Output:</dt
+><dd
+>This read-only "combo" view will import <object
+type="ttyped"
+>\ref</object
+> text and format <object
+type="ttyped"
+>$()</object
+> references, but the <abbrRef
+abbr="vUSFM"
+></abbrRef
+> markers used for structure and content will still be visible.</dd
+></dl
+><section3
+id="sPerformance"
+><secTitle
+>Performance Considerations</secTitle
+><p
+>Since Bible Modules don't tend to be organised by chapter and verse, the whole book is filed under chapter one, verse zero of the book. Paratext was not designed to load a whole Bible book into memory, which is why the option <object
+type="menu"
+>View</object
+>&gt;<object
+type="menu"
+>By Chapter</object
+> is activated by default. De-selecting this option will force Paratext to load entire books into memory and Paratext will become slow to respond.</p
+><p
+>When using a Bible module that may contain hundreds of pages of text, the same slowdown is experienced. Using a computer that well exceeds Paratext's minimum hardware requirements for Specification development, will alleviate much of the delay, but it should be expected that a large Bible module will respond slowly.</p
+><p
+>With the slowdown of large books in Paratext, it may be easiest to work in a text editor<endnote
+id="n-NeedsALabel-.xlingpaper.1..styledPaper.1..lingPaper.1..chapterInCollection.3..section1.1..section2.3..section3.1..p.3..endnote.1."
+><p
+>If you're looking for an excellent multilingual text editor, I wholeheartedly recommend EditPad Pro ($50 at <link
+href="https://www.editpadpro.com/"
+>https://www.editpadpro.com/</link
+> ) or Editpad Lite (free at <link
+href="https://www.editpadpro.com/"
+>https://www.editpadpro.com/</link
+> ). JGSoft, the developer, has what is probably the most complete regular expression (<link
+href="https://www.regular-expressions.info/"
+>https://www.regular-expressions.info/</link
+>) engine of any software. The best feature is that find/replace is dockable and in the same font, size and encoding of the document text. Even the free version of EditPad is light years ahead of Notepad++ (<link
+href="https://notepad-plus-plus.org/"
+>https://notepad-plus-plus.org/</link
+>).</p
+></endnote
+> to edit the specification file rather than Paratext, especially if the document will be complex.</p
+></section3
+></section2
+><section2
+id="sIntroBM"
+><secTitle
+>Rules for Bible Modules</secTitle
+><p
+>A Bible Module, like any text in Paratext, will be processed by Paratext to create various output forms. This means that to achieve the desired output, one must understand the limits of the system. Some errors will result in errors caught by the system, but others will result in errors in the outputted text.</p
+><p
+>In exploring the limits of Bible module specification files, much of the content in section <sectionRef
+sec="sIntroBM"
+></sectionRef
+> was previously outlined in an abbreviated form by author Matthew Lee and posted here: <link
+href="https://lingtran.net/Troubleshooting+Modules"
+>https://lingtran.net/Troubleshooting+Modules</link
+>.</p
+><section3
+id="s"
+><secTitle
+>USFM Markers</secTitle
+><p
+>Whenever possible, use a valid USFM marker or marker pair that is appropriate to the content you want to display. You can use any valid USFM markers in your Specification File. It is very likely that you will need markers in your Bible Module that you have never used in Bible books. Take some time to brows through the resources at <link
+href="https://ubsicap.github.io/usfm/master/index.html"
+>https://ubsicap.github.io/usfm/master/index.html</link
+> .</p
+></section3
+><section3
+id="sInclusion"
+><secTitle
+>Using Custom Markers</secTitle
+><p
+>For items of your module that will need special marking, but do not fit within the strict structure of <abbrRef
+abbr="vUSFM"
+></abbrRef
+>, you can (in this case) create custom markers for your document that will pass through to the export. For example, the a lectionary included the colour of the altar cloth as <object
+type="ttyped"
+>\col</object
+> which was output right aligned and italic. These custom markers will probably not show up in the intended font and style in the initial export, but can be quickly restyled as in section <sectionRef
+sec="sStyleSwap"
+></sectionRef
+>. Though this is a paragraph style, the same holds true for character styles (in the form <object
+type="ttyped"
+>\col</object
+>...<object
+type="ttyped"
+>\col*</object
+>)</p
+></section3
+><section3
+id="sImports"
+><secTitle
+>Importing “Live” Bible Text</secTitle
+><p
+>The headline feature of a Bible Module is that it always reflects the latest Bible text from your project. Each time the module is opened, it will re-import each verse from each book of the Bible to make sure that the file is up to date. This creates a huge advantage over copy and paste, as there is no need to remember which texts have been updated since you last copied them.</p
+><p
+>Tags in the format <object
+type="ttyped"
+>\ref MAT 5:1</object
+> will be replaced with the actual referenced text from the current project. After the <object
+type="ttyped"
+>\ref</object
+> marker, you must use a standard English chapter-verse specification, regardless of the chapter verse parameters configured in your project.</p
+><figure
+id="fInsideRef"
+><chart
+><img
+src="images/InsideVerseRef.png"
+width="5&quot;"
+></img
+></chart
+><caption
+>Elements of a Scripture Reference</caption
+></figure
+><p
+>A typical reference will consist of 9 elements (see figure <figureRef
+figure="fInsideRef"
+></figureRef
+>):</p
+><ol
+><li
+>a normal space</li
+><li
+>the reference marker: <object
+type="ttyped"
+>\ref</object
+></li
+><li
+>a normal space</li
+><li
+>the English 3-letter code for each book (i.e. <object
+type="ttyped"
+>GEN</object
+>, <object
+type="ttyped"
+>MAT</object
+>)</li
+><li
+>a normal space</li
+><li
+>the chapter number</li
+><li
+>a colon</li
+><li
+>a verse number (i.e. <object
+type="ttyped"
+>1</object
+>), verse range (i.e. <object
+type="ttyped"
+>1-5</object
+>), or verse list (i.e. <object
+type="ttyped"
+>1,5</object
+>).</li
+><li
+>one more space</li
+></ol
+><p
+>The dividing period ":" and verse continuation dash "-", and continuing commas (,) are the <object
+type="tEmphasis"
+>only</object
+> valid punctuation for a Bible reference. The multiple chapter em dash<endnote
+id="nem_dash"
+><p
+>em dash: [—] A version of hyphen with the same width of a lowercase <object
+type="ttyped"
+>m</object
+>, thus given the name "em dash. "U+2014 em dash is used to make a break—like this—in the flow of a sentence. <citation
+page="270"
+paren="citationBoth"
+ref="rU10Core"
+></citation
+>" For the default English verse references in Paratext, an em dash is used to separate verse references that are in different chapters.</p
+></endnote
+> (—), semicolon (;), periods (.), parentheses, and further spaces are not valid in the numerical section of a <object
+type="ttyped"
+>\ref</object
+> reference.</p
+><p
+>Partial verse letters (i.e. <object
+type="ttyped"
+>5:9a</object
+>) will be ignored, and the whole verse will be imported. See section <sectionRef
+sec="sPartials"
+></sectionRef
+> for specific workarounds.</p
+><section4
+id="sWholeChap"
+><secTitle
+>Importing Whole Chapters</secTitle
+><p
+>In Paratext 7.5+, you could not simply insert <object
+type="ttyped"
+>\ref PSA 1</object
+>, you had to list the verses explicitly such as <object
+type="ttyped"
+>\ref PSA 1:1-6</object
+>. In Paratext 8, <object
+type="ttyped"
+>\ref PSA 1</object
+> is possible, but note that the chapter number will still not be included in the text.</p
+></section4
+><section4
+id="sMultChap"
+><secTitle
+>References that span multiple chapters</secTitle
+><p
+>References bridging several chapters do work, but oddly they expect a hyphen (<object
+type="ttyped"
+>\ref 2CO 5:20-6:10</object
+>) instead of the proper em dash (<object
+type="ttyped"
+>\ref 2CO 5:20—6:10</object
+>), Nevertheless, you should probably split up chapters into separate <object
+type="ttyped"
+>\ref</object
+>s to break up the text or to add chapter numbers (which cannot be imported). It is probably best to split the reference into <object
+type="ttyped"
+>\ref 2CO 5:20-21</object
+> and <object
+type="ttyped"
+>\ref 2CO 6:1-10</object
+> and add an extra <object
+type="ttyped"
+>\p</object
+> (and maybe <object
+type="ttyped"
+>\c</object
+> ) in between to alert the reader to a change of chapter.</p
+></section4
+><section4
+id="sRefCommas"
+><secTitle
+>References with Commas</secTitle
+><p
+>References that use commas to jump verses sometimes work (<object
+type="ttyped"
+>\ref ACT 1:1-5,8</object
+>), but don't other times do not (<object
+type="ttyped"
+>\ref GEN 4:26-5:1,3</object
+> does not import verse 3). From testing, It seems that you are only allowed to use one comma "," or a dash "-" in each reference, and not both. These combinations cause silent errors (missing text) that are hard to find without reading the text, and thus should generally be avoided in <object
+type="ttyped"
+>\ref</object
+>, while they are fine in <object
+type="ttyped"
+>$()</object
+> formatted references. From a formatting perspective, it may be best to split such a <object
+type="ttyped"
+>\ref</object
+> into separate lines, and give an extra <object
+type="ttyped"
+>\p</object
+> in between if you want to alert the reader to a jump in continuity.</p
+></section4
+><section4
+id="sPartials"
+><secTitle
+>References with Partial Verses</secTitle
+><p
+>Verses not split into parts in the text are usually imported completely. Thus <object
+type="ttyped"
+>\ref 2CO 5:20b</object
+> imports all of 5:20. For the benefit of the translator working with a Bible version in a different language, it may be best to avoid partial verse references in Bible Modules if possible.</p
+><p
+>If you must use partial references in your publication, it is recommended that you check each one in your output to verify that it appears as expected, you may have to manually remove unwanted text from the exported output.</p
+></section4
+></section3
+><section3
+id="sFormRef"
+><secTitle
+>Formatted References</secTitle
+><p
+>Tags in the format <object
+type="ttyped"
+>$(MAT 5:1)</object
+> will be dynamically reformatted to show the vernacular book title (as chosen in <object
+type="menu"
+>Project</object
+>&gt;<object
+type="menu"
+>Scripture Reference Settings</object
+>&gt;<object
+type="menu"
+>Book Names</object
+>&gt;<object
+type="menu"
+>Cross-References (\xt) use</object
+>) and the verse references will be reformatted to follow your Scripture Reference Settings (as chosen in <object
+type="menu"
+>Tools</object
+>&gt;<object
+type="menu"
+>Scripture Reference Settings</object
+>&gt;<object
+type="menu"
+>Reference Format</object
+>). Do not write these out manually (i.e. <object
+type="ttyped"
+>Matthew 5:7</object
+>) in your specification file unless you intend for certain references to be left in a vehicular language by the translators (see section <sectionRef
+sec="sCustomTransMap"
+></sectionRef
+>). The syntax requirements for formatted references are less restrictive than <object
+type="ttyped"
+>\ref</object
+>s. The dividing colon ":", verse continuation "-", list of verses comma (,), the multiple-chapter em dash (—), the list of chapter/book semicolon (;) are all valid. Parentheses are not valid. Periods, parentheses, and further spaces are not valid in the numerical section of a reference, and partial verse letters (i.e. 5:9a) will be ignored.</p
+><section4
+id="sCustomPunct"
+><secTitle
+>References with Very Custom Punctuation</secTitle
+><p
+>Some communities may want "custom" punctuation of verse references (i.e. Catholic Psalm chapters from <abbrRef
+abbr="vNAB"
+></abbrRef
+>) that Paratext's Scripture Reference settings just can't parse. For example, a reference with internal parentheses <object
+type="ttyped"
+>$(LUK 2:1-14,(15-20))</object
+>, indicating an optional reading in a lectionary, crashes the Module parser and the reference text does not show (failing with just a closing parenthesis). If your Module requires "custom" formatting of verse references, you can do this: <object
+type="ttyped"
+>$(LUK) 2:1-14,(15-20)</object
+>. The advantage is that the Book Title is automagically replaced with the <object
+type="menu"
+>TOC2</object
+> or <object
+type="menu"
+>TOC3</object
+> specified, but the disadvantage is that Paratext no longer verifies the correctness of the reference in <object
+type="menu"
+>Basic Checks</object
+>.</p
+></section4
+></section3
+><section3
+id="sLiteralText"
+><secTitle
+>Literal Text</secTitle
+><p
+>Not all text in a Specification file will be imported or translated by the export process. Some literal text, such as headings and non-biblical texts will likely be added to the specification file. Titles should be marked with standard <abbrRef
+abbr="vUSFM"
+></abbrRef
+> structural markers such as <object
+type="ttyped"
+>\mt1</object
+>, <object
+type="ttyped"
+>\mt2</object
+>, <object
+type="ttyped"
+>\s1</object
+> and <object
+type="ttyped"
+>\s2</object
+>. Prayers, explanations, and other texts can be marked by <object
+type="ttyped"
+>\p</object
+>, <object
+type="ttyped"
+>\q1</object
+>, and <object
+type="ttyped"
+>\q2</object
+>. Bible modules will usually not contain structural verse markers or chapter markers, as they are organised chronologically.</p
+><p
+>If the target language group wants to localise the guidepost terms in your Bible Module, and the authors do encourage this, see section <sectionRef
+sec="sCustomTransMap"
+></sectionRef
+>.</p
+></section3
+><section3
+id="sVerifying"
+><secTitle
+>Verifying your Bible Module</secTitle
+><p
+>With the exception of a few "silent" errors mentioned in section <sectionRef
+sec="sImports"
+></sectionRef
+> and <sectionRef
+sec="sFormRef"
+></sectionRef
+>, Paratext can help you to verify both the existence and formatting of your Bible References. When working in the <object
+type="menu"
+>Standard Specification</object
+> or <object
+type="menu"
+>Unformatted Specification</object
+> views (see section <sectionRef
+sec="sViews"
+></sectionRef
+>), Paratext will show you the status of your Bible Module in the corner of the window, as seen in figure <figureRef
+figure="fVerStats"
+></figureRef
+>.</p
+><figure
+id="fVerStats"
+><chart
+><img
+src="images/VerifyBM.png"
+></img
+></chart
+><caption
+>Live verification of your Bible Module</caption
+></figure
+><p
+>These statistics will be updated each time you save the file. The first statistic is the number of verses listed in the module specification that have been translated, as well as a percentage. If your project is only translating scripture portions, this information will be a very useful gauge for project progress. The next part of this menu is a count of errors. These errors often represent typos in your specification file, such as referencing a non-existent chapter or verse. Especially with challenges of versification, this tool is the friend of any Bible module user. The icon of a blue check on a page will take you directly to a list of untranslated references, invalid references, and other structural errors in your Bible Module.</p
+><figure
+id="fModBookCheck"
+><chart
+><img
+src="images/VerifyBM2.png"
+></img
+></chart
+><caption
+>The resulting list after clicking on the check button.</caption
+></figure
+><p
+>The included "<object
+type="tItalic"
+>Warning: double clicking to go to text in a Bible Module is not reliable</object
+>" is to be noted. Since Bible Modules don't tend to be organised by chapter and verse, the whole book is filed under chapter one, verse zero of the book. See section <sectionRef
+sec="sPerformance"
+></sectionRef
+> for more information on this. You will have to find the mentioned errors by scrolling or using <object
+type="menu"
+>Find/Replace</object
+>.</p
+></section3
+></section2
+><section2
+id="sVersification"
+><secTitle
+>Versification Woes</secTitle
+><p
+>One of the first lines in your Bible module will start with <object
+type="ttyped"
+>\vrs</object
+>, which refers to Versification.</p
+><p
+>Paratext supports the predefined and custom versifications. The quoted text in the following section is drawn from Paratext Help <citation
+author="no"
+paren="citationBoth"
+ref="rPT8"
+></citation
+>:</p
+><dl
+><dt
+>Original (org):</dt
+><dd
+>"Old Testament based on Hebrew versification, New Testament and Deuterocanonical books based on the Septuagint". One large difference from English is that often Psalm descriptions such as "A Psalm of David" are numbered as verse 1.</dd
+><dt
+>English (eng):</dt
+><dd
+>"Old Testament, New Testament and Deuterocanonical books based on a tradition used by many English and Spanish Bibles" Unlike Original, descriptions such as "A Psalm of David" are not part of the verse content.</dd
+><dt
+>Septuagint (lxx):</dt
+><dd
+>"Old Testament, New Testament and Deuterocanonical books based on the Septuagint "</dd
+><dt
+>Vulgate (vul):</dt
+><dd
+>"Old Testament, New Testament and Deuterocanonical books based on the Vulgate" Similar to Original, this versification is sometimes used by Catholic translations that use Latin sources.</dd
+></dl
+><p
+>For relatively small projects, especially ones centered in the New Testament, versification may not have a large impact on your Bible module. As a bonus, if the versification chosen in the Bible module does not match the versification chosen in the target project under <object
+type="menu"
+>Project</object
+> &gt; <object
+type="menu"
+>Project Properties and Settings</object
+>, Paratext will attempt to "translate" your project into the target versification when extracting text from the Bible.</p
+><p
+>If your translation uses a versification other than English, you may have to adapt your Bible Module to this versification. This is surprisingly non-trivial and can be a monotonous and error-prone task to do manually. There is script developed by author Matthew Lee that exists to convert a Bible module in one versification to another. It can also be run on your current module file to verify that you have not created any "broken" or disallowed references. This Python script can be downloaded here <link
+href="https://github.com/erros84/PtxModuleVersification/"
+>https://github.com/erros84/PtxModuleVersification/</link
+> .</p
+></section2
+><section2
+id="sCustomTransMap"
+><secTitle
+>Customising and Translating your Map File</secTitle
+><p
+>Your Specification file will contain a mix of imported and literal text. In the example of a lectionary, this literal text will include most of your headings. Based on the considerations in section <sectionRef
+sec="sLangs"
+></sectionRef
+>, you may need to translate your specification file into a language understood by the national translators, so that they, in turn, can translate the relevant parts into the vernacular. You may also want to duplicate information that is intended to be shown in multiple languages (i.e. Vernacular and official languages).</p
+><p
+>As many of the snippets of text may be repeated, you may choose some method of Find and Replace, starting with the longest phrase and working to the shortest<endnote
+id="nAlgo"
+><p
+>This method avoids errors where shorter sections inside a text from being replaced before the longer sections.</p
+></endnote
+>.</p
+></section2
+></section1
+><section1
+id="sCreateMap"
+><secTitle
+>Creating the Map File</secTitle
+><p
+>Now that you understand how a Bible module works, you can start making a specification file. Ideally, you will be working from a digital text that can be manipulated (such as the example files on the GitHub site), but they can be typed in if there is only a printed model. Even with automagic processes, this can be a painstaking process. Whatever the method, it is best to do several passes to verify that no new errors are introduced. Don't be surprised if you find errors in your model text.</p
+><section2
+id="sFrontMatter2"
+><secTitle
+>Front Matter</secTitle
+><p
+>Some of your front matter, such as a title page, copyright page and preface could be added to the specification file to streamline the later publication process. Obviously, one will need to consider the language used for each section. Generated fields like the table of contents (section <sectionRef
+sec="sTOC"
+></sectionRef
+>) and indexes (section <sectionRef
+sec="sIndexes"
+></sectionRef
+>) are dependent on the final output and are better left to a desktop publishing tool later.</p
+></section2
+></section1
+><section1
+id="sSetup"
+><secTitle
+>Setting up your Paratext Project</secTitle
+><p
+>Before starting to work with Bible Modules, you'll need to make sure that the project is ready. This involves configuring a few options and verifying that your project does not have missing or out-of place verse numbers.</p
+><section2
+id="sTOC1to3"
+><secTitle
+>Book Names</secTitle
+><p
+>Paratext allows users to customise the long names (toc1), short names (toc2), and abbreviations (toc3). While older versions of Paratext required manual editing of <object
+type="ttyped"
+>\toc</object
+> (table of contents) markers at the start of each book, Paratext now collects all of this data in a dialogue box found under <object
+type="menu"
+>Project</object
+> &gt; <object
+type="menu"
+>Scripture Reference Settings</object
+> &gt; <object
+type="menu"
+>Book Names</object
+>. For a lectionary, it is important to make sure that all books are configured, even if not included in your project.</p
+><tablenumbered
+id="ntTocs"
+><table
+border="1"
+><caption
+>TOC Levels</caption
+><tr
+><th
+>toc1</th
+><td
+>Long Name</td
+><td
+>The Gospel According to Matthew</td
+></tr
+><tr
+><th
+>toc2</th
+><td
+>Short Name</td
+><td
+>Matthew</td
+></tr
+><tr
+><th
+>toc3</th
+><td
+>Abbreviation</td
+><td
+>MAT</td
+></tr
+></table
+></tablenumbered
+><figure
+id="fRefOps"
+><chart
+><img
+src="images/tocchoice.png"
+></img
+></chart
+><caption
+>Reference Options</caption
+></figure
+><p
+>The option <object
+type="menu"
+>Cross References (\xt) use</object
+> in this dialogue box determines not only how the <object
+type="ttyped"
+>\xt</object
+>'s look, but also the final format of <object
+type="ttyped"
+>$()</object
+> references in Bible Modules. The three letter codes will be replaced with your choice of TOC1, TOC2 or TOC3. The option <object
+type="menu"
+>Parallel Passages References use (\r, \mr</object
+> will cover any <object
+type="ttyped"
+>\r</object
+> or related links.</p
+><p
+>Generally, the more biblically literate the community, the shorter the <abbrRef
+abbr="vTOC"
+></abbrRef
+> that can be used. TOC2 is likely a good compromise of succinctness and clarity for formatted Bible references.</p
+><p
+>See <object
+type="menu"
+>Best practice for choosing abbreviations for book names</object
+> in Paratext Help for more info about the abbreviations.</p
+><framedUnit
+framedtype="ftSample"
+><p
+>Note: Even though these settings affect the <object
+type="ttyped"
+>$()</object
+> formatted references in Bible Modules, the references (<object
+type="ttyped"
+>\ref</object
+>) in Bible Modules must still follow English 3-letter abbreviations and punctuation.</p
+></framedUnit
+></section2
+><section2
+id="sChapterVerseCheck"
+><secTitle
+>Chapter &amp; Verse Check</secTitle
+><p
+>Your Paratext Bible books should be free of marker errors, especially those relating to chapters, verses, and markers. Use the built-in Chapter/verse and Marker checks to make sure that you have not skipped or repeated chapters and verses throughout your text. If one fails to do this, Paratext cannot be expected to import all of your text.</p
+><ul
+><li
+>Click in your project window</li
+><li
+>Checking &gt; <object
+type="menu"
+>Run Basic Checks</object
+></li
+><li
+>Check <object
+type="menu"
+>Chapter/verse numbers</object
+> and <object
+type="menu"
+>Markers</object
+>.</li
+><li
+>Uncheck any other checks.</li
+><li
+>If necessary, click <object
+type="menu"
+>Choose…</object
+> and choose the book(s) you want to check</li
+><li
+>Click <object
+type="menu"
+>OK</object
+>.<br
+></br
+><object
+type="tItalic"
+>A windows appears with a list of the errors.</object
+></li
+><li
+>Double-click a line in the list.</li
+><li
+>Correct the error in your project.</li
+><li
+>Double-click the next line in the list.</li
+><li
+>Continue for all the errors.</li
+><li
+>Click "<object
+type="menu"
+>Rerun</object
+>" button to check that all the errors have been corrected.</li
+><li
+>Close the results list window.</li
+></ul
+></section2
+><section2
+id="sOtherChecks"
+><secTitle
+>Other Checks</secTitle
+><p
+>While this is not specific to Bible Modules, it is in the best interest of the project text to work through available Biblical terms, wordlists, spell-checking, parallel passages and punctuation checks that Paratext has.</p
+><p
+>If you are interested in a guide through these tasks, there is a series of Paratext manuals available in English at <link
+href="https://lingtran.net/Paratext+8+Course+Manuals"
+>https://lingtran.net/Paratext+8+Course+Manuals</link
+> and French at <link
+href="http://outilingua.net/Paratext+8+Manuel"
+>http://outilingua.net/Paratext+8+Manuel</link
+>. The Basic Checks are covered in several chapters of the Stage 1-2 Manual.</p
+></section2
+><section2
+id="sBT"
+><secTitle
+>Biblical Terms</secTitle
+><p
+>Paratext has powerful tools to help you harmonise your Biblical key terms between passages and with your source texts. The Biblical terms tool works with only the text you have, so its use will not be greatly different whether translating portions or books.</p
+><p
+>For details, please go to the site below and go to the chapter titled <object
+type="tItalic"
+>BT: A 4-Step process</object
+>.</p
+><p
+><link
+href="https://lingtran.net/Paratext+8+Stages+1+and+2"
+>https://lingtran.net/Paratext+8+Stages+1+and+2</link
+></p
+></section2
+><section2
+id="sWordlist"
+><secTitle
+>Wordlist</secTitle
+><p
+>Paratext has powerful tools to help you to spellcheck texts in the target language. The <object
+type="menu"
+>Wordlist</object
+> tool works with only the text you have, so its use will not be greatly different whether the team is translating portions or books.</p
+><p
+>For details, please go to the site below and go to the chapter titled: <object
+type="tItalic"
+>Spell Checking</object
+></p
+><p
+><link
+href="https://lingtran.net/Paratext+8+Stages+1+and+2"
+>https://lingtran.net/Paratext+8+Stages+1+and+2</link
+></p
+><p
+>You may sometimes want to remove Bible Module books from your wordlist, especially if you have much text that is not in the target language. Use the feature: <object
+type="menu"
+>View</object
+>&gt;<object
+type="menu"
+>Set Scripture Range</object
+> and deselect the XX books.</p
+></section2
+><section2
+id="sParallel"
+><secTitle
+>Parallel Passages</secTitle
+><p
+>Paratext can also allow you to compare similar or quoted passages across multiple books. The <object
+type="menu"
+>Parallel Passages</object
+> tool works with only the text you have, so its use will not be greatly different whether the team is translating portions or books.</p
+><p
+>For details, please go to the site below and go to the chapter titled: <object
+type="tItalic"
+>Compare Parallel Passages</object
+>.</p
+><p
+><link
+href="https://lingtran.net/Paratext%208%20Stages%203%20to%206"
+>https://lingtran.net/Paratext%208%20Stages%203%20to%206</link
+></p
+></section2
+></section1
+><section1
+id="sChoosePub"
+><secTitle
+>Choosing a Publishing Path</secTitle
+><p
+>From Paratext, which requires a very uniform structure, there are many publishing pathways available.</p
+><p
+>When choosing a publishing path for this project, there were some constraints. From a formatting perspective an appropriate publishing path should contain or allow:</p
+><ul
+><li
+>repeatable replacement of "standard" Paratext styles with custom styles.</li
+><li
+>customisation of outputted text, including smart or manual pagination.</li
+><li
+>a customisable table of contents.</li
+><li
+>front and back matter.</li
+><li
+>running headers (headers automagically generated from page content).</li
+><li
+>conversion of custom <abbrRef
+abbr="vUSFM"
+></abbrRef
+> markers into visible formatting.</li
+><li
+>a minimal cost-to-effort ratio.</li
+></ul
+><p
+>For Bible modules that will be reused in multiple languages, the process needed to be repeatable with as little involvement from the technician as possible. An ideal publishing process would produce a new editable draft of a book for team revision and pagination in as little as 30 minutes.</p
+><p
+>An added bonus would be that the language team (would not have to learn a new application to do this final pagination and read-through.</p
+><p
+>After checking and pagination by the team, the document would need to be exported to a <abbrRef
+abbr="vPDF"
+></abbrRef
+><endnote
+id="nPDF"
+><p
+>Portable Document Format: a proprietary, yet widely supported document format developed by Adobe where content is "frozen" as if on a printed page. This format, which is generally non-editable, is an ideal way to ensure that formatting decisions are maintained, no matter the viewer or printer. It also prohibits the team from making changes that don't ever get put back into Paratext.</p
+></endnote
+> by the technician to the specifications of our local print shop, as well as saving the printer the time of manual layout.</p
+><p
+>The following sections will discuss the advantages and disadvantages of various publishing paths.</p
+><section2
+id="sXeLaTeX"
+><secTitle
+>Print Draft (XeLaTeX)</secTitle
+><p
+>Print Draft is a feature of Paratext that exports books are quickly converted automagically (via a XeLaTeX<endnote
+id="nXeLaTeX"
+><p
+>XeLaTeX ['zilatɛk] is a derivative of LaTeX which is in turn a derivative of TeX, and each signify a system of laying out documents. The mixed capitalisation of this proper noun is intentional.</p
+></endnote
+> compiler) into visually-pleasing <abbrRef
+abbr="vPDF"
+></abbrRef
+> via a complex system of weights and measures.</p
+><p
+>If your specification file contains only standard <abbrRef
+abbr="vUSFM"
+></abbrRef
+> codes, then Print Draft (see figure <figureRef
+figure="fPrintDraft"
+></figureRef
+>) may work for you. If not, customising this output yourself is a veritable rabbit hole of learning and configuration, and there may be more fruitful uses of your time.</p
+><figure
+id="fPrintDraft"
+><chart
+><img
+src="images/PrintDraft.png"
+></img
+></chart
+><caption
+>Print Draft Options</caption
+></figure
+><p
+><object
+type="menu"
+>Print Draft</object
+> may work for some simple Bible Modules with no custom formatting.</p
+></section2
+><section2
+id="sPathway"
+><secTitle
+>Pathway</secTitle
+><p
+>Pathway is a product of <abbrRef
+abbr="vSIL"
+></abbrRef
+> International whose effect is somewhere between <object
+type="menu"
+>Print Draft</object
+> and <object
+type="menu"
+>Export to <abbrRef
+abbr="vRTF"
+></abbrRef
+></object
+>. It allows you to export to:</p
+><ul
+><li
+>OpenOffice/LibreOffice</li
+><li
+>PDF via OpenOffice/LibreOffice</li
+><li
+>HTML5</li
+><li
+>Adobe inDesign</li
+><li
+>and other formats such as GoBible, TheWord, Sword, and MySword.</li
+></ul
+><p
+>With the powerful customisation of output formatting and easy repeatability of output, this is a viable option for modules less than a few hundred pages.</p
+><p
+>Unfortunately, through no fault of Pathway, LibreOffice (and the Oracle equivalent OpenOffice) both choke on large documents. Any document over 300 pages may be painfully slow to edit and crash-prone. At least on Windows, this seems to stem from the fact that LibreOffice is limited to using 150 Megabytes of <abbrRef
+abbr="vRAM"
+></abbrRef
+>, no matter how much <abbrRef
+abbr="vRAM"
+></abbrRef
+> or processing power your system has available, and using LibreOffice for a large document is the technical equivalent of filling a swimming pool with a garden hose.</p
+></section2
+><section2
+id="sLibreOffice"
+><secTitle
+>RTF to LibreOffice</secTitle
+><p
+>See section <sectionRef
+sec="sPathway"
+></sectionRef
+> for an explanation as to why this was not feasible.</p
+></section2
+><section2
+id="sPAtoID"
+><secTitle
+>Publishing Assistant and inDesign</secTitle
+><p
+>Publishing Assistant is a companion tool to Paratext designed to bridge Paratext to your desired publishing tool. As stated on the <abbrRef
+abbr="vPA"
+></abbrRef
+> website: "distribution of Publishing Assistant does not take place without appropriate training and support <citation
+ref="rPA"
+></citation
+>".</p
+><p
+>Adobe inDesign is a professional-level book and document editing tool, and the go-to choice for many typesetters.</p
+></section2
+><section2
+id="sRTFPub"
+><secTitle
+>RTF and Microsoft Publisher</secTitle
+><p
+>Microsoft Publisher is a cousin of Microsoft Word, allowing many tasks that are more common in the publishing of a book. Publisher was considered by the authors, but it lacks the ability to do running headers based on embedded style information. This missing feature could have created hours of work for each publication of synchronising headers with content.</p
+></section2
+><section2
+id="sScribus"
+><secTitle
+>RTF and Scribus</secTitle
+><p
+>Scribus is a free alternative to inDesign that offers many advanced publishing features at the cost of an intimidating interface. An admittedly brief test showed that Scribus suffered the similar lack as Microsoft Publisher of running headers.</p
+></section2
+><section2
+id="sRTFWord"
+><secTitle
+>RTF to Microsoft Word</secTitle
+><p
+>Microsoft Word, even though it is better-suited for documents than books, is a mature tool that is more powerful than most users realise. As the reader will see in section <sectionRef
+sec="sTypesetRTF"
+></sectionRef
+>, Microsoft Word contains all of the necessary features needed to prepare a complex document. One of these is running headers, that will save lots of work.</p
+><p
+>One disadvantage of Word over a more professional typesetting tool is that there is no method for vertically aligning the lines of the front of the page with those on the back. For Bibles printed on the traditional thin paper, this would be a troublesome issue, but for Bible Modules be printed on standard paper, the effect of any such misalignment should be minimal.</p
+></section2
+></section1
+><section1
+id="sTypesetRTF"
+><secTitle
+>“Typesetting” RTF through Word</secTitle
+><p
+>Based of the findings in section <sectionRef
+sec="sChoosePub"
+></sectionRef
+>, Microsoft Word is ideal for typesetting. The following sections will guide you through the important steps<endnote
+id="nWindows"
+><p
+>The following steps assume a Windows© environment, as this is the only environment that can natively run Paratext and Microsoft Word. The following steps are based on Microsoft Word 2016, which is the most recent version of the application as of writing.</p
+></endnote
+> in "typesetting", but many of the decisions will be up to you.</p
+><section2
+id="sExportFromPT"
+><secTitle
+>Export from Paratext</secTitle
+><p
+>Since we have chosen to do typesetting in Word, we need to get the text into a format Word can understand. <abbrRef
+abbr="vRTF"
+></abbrRef
+> (Rich Text Format) is a standard format that almost any word processor can read.</p
+><ol
+><li
+>Open your project in Paratext.</li
+><li
+>Navigate to the book containing your Bible module.</li
+><li
+>From the <object
+type="menu"
+>File</object
+> menu, choose <object
+type="menu"
+>Save as <abbrRef
+abbr="vRTF"
+></abbrRef
+>...</object
+></li
+><li
+>Verify that the correct XX book is chosen. <br
+></br
+><img
+src="images/ExportRTF.png"
+></img
+><br
+></br
+><object
+type="tItalic"
+>The chapter defaults will be fine, as the whole Bible Module is Chapter one, verse zero.</object
+></li
+><li
+>Click <object
+type="menu"
+>Save</object
+>.</li
+><li
+>Choose a location and a file name and save this file.<br
+></br
+><object
+type="tItalic"
+>It is probably best to create a new folder for this work.</object
+></li
+></ol
+></section2
+><section2
+id="sRTFDocX"
+><secTitle
+>Convert RTF to DOCX</secTitle
+><p
+>While <abbrRef
+abbr="vRTF"
+></abbrRef
+> can be read by Word, <abbrRef
+abbr="vRTF"
+></abbrRef
+> files are sometimes an order of magnitude larger than the same file in the native Word format of <object
+type="ttyped"
+>.docx</object
+>. Since this is currently a huge file, and Word is probably reacting sluggishly, we want to immediately re-save it as a <object
+type="ttyped"
+>.docx</object
+> file.</p
+><ol
+><li
+>Open the <abbrRef
+abbr="vRTF"
+></abbrRef
+> File you saved in Microsoft Word</li
+><li
+>From the <object
+type="menu"
+>File</object
+> menu, choose <object
+type="menu"
+>Save as</object
+>.</li
+><li
+>Choose a location.</li
+><li
+>Choose a filename and verify that the file is being saved as <object
+type="menu"
+>Word Document (*.docx)</object
+>.<br
+></br
+><img
+src="images/docx.png"
+></img
+></li
+><li
+>Click <object
+type="menu"
+>OK</object
+>.</li
+><li
+>Close Word and open the <object
+type="ttyped"
+>.docx</object
+> file you just saved.<br
+></br
+><object
+type="tItalic"
+>This should clear the large amount of your computer's memory that Word was using.</object
+></li
+></ol
+></section2
+><section2
+id="sBasicForm"
+><secTitle
+>Page Formatting</secTitle
+><p
+>Using Word's options, you need to set your page formatting.</p
+><ol
+><li
+>From the <object
+type="menu"
+>Layout</object
+> ribbon, choose <object
+type="menu"
+>Page Size</object
+>.</li
+><li
+>Change the Page Size (if needed).<br
+></br
+><object
+type="tItalic"
+>Booklets can use A5 or half-letter size (with the plan to print on folded A4/letter sheets).</object
+></li
+><li
+>Change the Margins.<br
+></br
+><object
+type="tItalic"
+>You can use margins of 0.5 inches on each side, with a 0.25 inch gutter.</object
+></li
+></ol
+></section2
+><section2
+id="sStyleSwap"
+><secTitle
+>Unravelling Word Styles</secTitle
+><p
+>The formatting of every bit of text you see in Word is controlled by three factors, paragraph styles, character styles, and manual formatting.</p
+><p
+>Paragraph styles, shown with a "¶" icon in the <object
+type="menu"
+>Styles</object
+> window, are applied to a whole line (or paragraph). Paragraph styles can have custom fonts and styles, but most often define horizontal alignment, line spacing, tabs, and spacing before and after. A single line can only be marked with one paragraph style, so you cannot mark some text on a line as <object
+type="ttyped"
+>Heading 1</object
+> and other text as <object
+type="ttyped"
+>Heading 2</object
+>.</p
+><p
+>Character styles, shown with an "a" icon in the <object
+type="menu"
+>Styles</object
+> window, are applied to a string of characters. Prototypical character formatting consists of fonts, bold, italic, underline, subscript or superscript. A single line of text can be marked with several character styles, but they cannot overlap. You can mark some text on a line as <object
+type="ttyped"
+>Bold</object
+> and other text as <object
+type="ttyped"
+>Italic</object
+>.</p
+><p
+>Manual formatting is the least predictable, as it is added by the user and leaves no record, and overrides the styles. Fortunately, it is easy to remove. To clear all manual formatting or the manual formatting applied to a single line, select the text and press <object
+type="menu"
+>Ctrl</object
+> + <object
+type="menu"
+>Space </object
+>.</p
+><p
+>Because of the method that is used to export to <abbrRef
+abbr="vRTF"
+></abbrRef
+>, every element in your document will be helpfully marked with paragraph and character styles named after the <abbrRef
+abbr="vUSFM"
+></abbrRef
+> markers you used in the Bible Module. For example, each <object
+type="ttyped"
+>\r</object
+> marker is listed in the styles as the paragraph style <object
+type="ttyped"
+>r</object
+>, and some text may be marked with an <object
+type="ttyped"
+>it</object
+> character style for italic.</p
+><p
+>In most cases, this means that (after clearing manual styles) you only need to reformat each style of object once, and it will affect the whole document, and this is wonderful news.</p
+><section3
+id="sStyleCommand"
+><secTitle
+>Your Stylesheet Command Centre</secTitle
+><p
+>You need to set up word for customising styles:</p
+><ol
+><li
+>First, you need to open the <object
+type="menu"
+>Styles</object
+> window. Go to the Home ribbon and click on the <img
+src="images/restoresm.png"
+></img
+> icon below the list of styles.<br
+></br
+><img
+src="images/stylewin.png"
+></img
+> <br
+></br
+><object
+type="tItalic"
+>The styles window will open. You may want to drag this window to the left or right and dock it.</object
+><br
+></br
+></li
+><li
+>The style window shows well over 100 styles and we don't need to see styles not used in the document. <ol
+><li
+>Click the <object
+type="menu"
+>Options</object
+> link in the bottom right of the styles window.</li
+><li
+>From the <object
+type="menu"
+>Select styles to show:</object
+> drop-down, select "<object
+type="ttyped"
+>In use</object
+>". <br
+></br
+><object
+type="tItalic"
+>Now Word only shows the styles used in your document.</object
+></li
+></ol
+></li
+><li
+>You now need to open the <object
+type="menu"
+>Style Inspector</object
+> window. Click the style inspector button in the style window. <br
+></br
+><img
+src="images/open%20Style%20Inspector.png"
+></img
+><br
+></br
+><object
+type="tItalic"
+>This will open the <object
+type="menu"
+>Style Inspector</object
+> window. You may want to drag this window to the left or right and dock it.</object
+></li
+><li
+>(Some of these set-up steps may need to be repeated the next time you open Word.)</li
+></ol
+><p
+>Now we are set up to inspect and change each style.</p
+><p
+>Click on any text in the document, and the Style Inspector will helpfully show the paragraph and character-style names of this text, as well as a summary of the included formatting.</p
+><figure
+id="fStyleInspector"
+><chart
+><img
+src="images/inspecting.png"
+></img
+></chart
+><caption
+>The Style inspector window.</caption
+></figure
+><p
+>You can see that this text's paragraph style is <object
+type="ttyped"
+>r - Heading - Parallel References</object
+> and the character style is <object
+type="ttyped"
+>it...it* - Character - Italic Text</object
+>. If we wanted to right-align all <object
+type="ttyped"
+>\r</object
+> references, we would need to click on the paragraph style and click <object
+type="menu"
+>Modify</object
+>.</p
+><figure
+id="fModStyle"
+><chart
+><img
+src="images/modstyle.png"
+></img
+></chart
+><caption
+>Modifying a particular style</caption
+></figure
+><p
+></p
+><p
+>This brings you to the <object
+type="menu"
+>Modify Style</object
+> dialogue box. From this window, you can see everything that is configured for this style, or make changes.</p
+><figure
+id="fModStyBox"
+><chart
+><img
+src="images/modstywin.png"
+></img
+></chart
+><caption
+>The Modify Style dialogue box</caption
+></figure
+><p
+></p
+><p
+>As you can see, many options can be configured directly in this window. Some of the most useful here will be horizontal alignment (left, centre, and right), bold, and italic.</p
+><p
+>Others can be configured through the <object
+type="menu"
+>Format</object
+> button, see figure <figureRef
+figure="fFormCat"
+></figureRef
+>.</p
+><figure
+id="fFormCat"
+><chart
+><img
+src="images/formatmenu.png"
+></img
+></chart
+><caption
+>Format Categories</caption
+></figure
+></section3
+><section3
+id="sFont"
+><secTitle
+>Styles: Font</secTitle
+><p
+>This dialogue probably does not need to be explained, but you will use this dialogue to customise the fonts of your Bible Module. In vernacular publishing, your first priority will be to choose fonts that are easily readable and contain all of the characters needed in each language. After that, you can choose fonts and styles that suit your needs.</p
+><p
+>For titles, you'll want to find fonts and styles that establish a visual hierarchy <citation
+paren="citationBoth"
+ref="rFonts"
+></citation
+>. Focus on larger and bolder fonts for more important things. Usually sans-serif fonts are best for headings.</p
+><p
+>Serif fonts are usually best for paragraph text, and the size of the text font will practically determine the length of your publication.</p
+><p
+>Following conventional wisdom, try to keep the number of fonts on each page to three or less.</p
+></section3
+><section3
+id="sSpacing"
+><secTitle
+>Styles: Paragraph Indents and Spacing</secTitle
+><p
+>Clicking on the Paragraph option brings up...unsurprisingly...the paragraph dialogue box. Both tabs of this dialogue determine spacing around and inside a paragraph.</p
+><figure
+id="fFormPara"
+><chart
+><img
+src="images/paragrab.png"
+></img
+></chart
+><caption
+>Paragraph Window</caption
+></figure
+><p
+>The relevant options and their utility for this process are discussed below.</p
+><dl
+><dt
+>Alignment:</dt
+><dd
+>Left, Right, Centre and Justify. Paragraph text should probably be set to Justify<endnote
+id="nJustify"
+><p
+>Word's justification and hyphenation algorithms are somewhat less sophisticated than those used in inDesign, and this is one place where inDesign may have been a better choice. In narrow columns of text, Word's justification may exhibit a "river" effect of white space.</p
+></endnote
+> to avoid ragged right edges. Note that justification is affected by the hyphenation setting in section <sectionRef
+sec="sLanguage"
+></sectionRef
+>.</dd
+><dt
+>Outline Level:</dt
+><dd
+>This option is critical if you want to add a table of contents. Styles can be added to the automagic table of contents in this way.</dd
+><dt
+>Indentation &gt; Left and Right:</dt
+><dd
+>Indentation adds (or subtracts) horizontal space on the left or right or a paragraph beyond the page margins.</dd
+><dt
+>Indentation &gt; Special:</dt
+><dd
+>This option allows you to change the margins of the first or subsequent lines of each paragraph.</dd
+><dt
+>Spacing &gt; Before and After:</dt
+><dd
+>This option determines vertical space before and after a paragraph, and is affected by the latter. <object
+type="menu"
+>Don't add space between</object
+> option.</dd
+><dt
+>Spacing &gt; Line Spacing:</dt
+><dd
+>Line spacing controls the space between lines of the same paragraph. It should be noted that the units are lines (default values centre around 1), and this field can be configured up to 2 decimal places. Like font size, configuring this field can have a huge influence on the number of pages in your final document.</dd
+><dt
+>Don't add space between paragraphs of the same style:</dt
+><dd
+>This configures whether the space between paragraphs of the same style follow <object
+type="menu"
+>Before and After Spacing</object
+> (unchecked), or <object
+type="menu"
+>Line Spacing</object
+> (checked)</dd
+></dl
+></section3
+><section3
+id="sPageBreak"
+><secTitle
+>Styles: Paragraph Line and Page Breaks</secTitle
+><p
+>You may need to control spacing and pagination according to predictable patterns in the styles.</p
+><ol
+><li
+>From the <object
+type="menu"
+>Modify Style</object
+> menu on <object
+type="ttyped"
+>s2</object
+>, click on the <object
+type="menu"
+>Format</object
+> button, and choose <object
+type="menu"
+>Paragraph</object
+>.</li
+><li
+>In the Paragraph dialogue, click the <object
+type="menu"
+>Line and Page Breaks</object
+> tab.</li
+><li
+>Select the desired option.</li
+></ol
+><p
+>It should be noted that there are other interesting options here, sorted by order of importance.</p
+><dl
+><dt
+>Page break before</dt
+><dd
+>Often checked by default, this option ensures that Word will try to keep a single line of paragraph text from showing up at the top of a page. Use this for the style of the first element that appears on each page, <object
+type="ttyped"
+>s2</object
+> in the example files. It is also useful for each section title, <object
+type="ttyped"
+>s1</object
+>.</dd
+><dt
+>Widow/Orphan control</dt
+><dd
+>Often checked by default, this option ensures that Word will try to keep a single line of paragraph text from showing up at the top of a page</dd
+><dt
+>Keep with next</dt
+><dd
+>This option will tell Word that the current paragraph should not be separated by a page break from the following paragraph. This can be particularly useful to make sure that titles don't get separated from the text that they title.</dd
+><dt
+>Keep lines together</dt
+><dd
+>This option is more powerful than Widow/Orphan control, and forces the current paragraph to appear on the same page. It's probably best to avoid this, except in the case of long titles.</dd
+><dt
+>Don't hyphenate</dt
+><dd
+>This is only relevant for major languages that Word knows how to hyphenate. If you find that Word is trying to hyphenate your vernacular text, turn this off</dd
+></dl
+></section3
+><section3
+id="sBorder"
+><secTitle
+>Styles: Border</secTitle
+><p
+>If you want lines before or after certain types of paragraphs, you can choose the border style and location from the Border dialogue box. Simply choose the desired <object
+type="menu"
+>Style</object
+> and <object
+type="menu"
+>Width</object
+>, and then click where you want to add the border in the mock-up to the right.</p
+><figure
+id="fBorderTown"
+><chart
+><img
+src="images/borders.png"
+></img
+></chart
+><caption
+>Border dialogue box</caption
+></figure
+><p
+>The spacing between the border and the text is actually determined by configuring the space before or after the paragraph. See section <sectionRef
+sec="sSpacing"
+></sectionRef
+>.</p
+></section3
+><section3
+id="sLanguage"
+><secTitle
+>Styles: Language</secTitle
+><p
+>The Language dialogue box contains 2 sections related to spelling checking. For sections written in majority languages, selecting the language (if Word doesn't automatically recognise it) will allow you to do spelling and grammar check this content (this content was not checked by Paratext wordlists and checks). For sections in the vernacular, selecting <object
+type="menu"
+>Do not check spelling or grammar</object
+> will alleviate the annoyance of excess squiggly lines.</p
+></section3
+></section2
+><section2
+id="sTOC"
+><secTitle
+>Table of Contents</secTitle
+><p
+>You will probably want a table of contents for your document. By default, word will create the Table of contents based on Heading 1, 2 and 3 (which you don't have). Nevertheless, if things are set up properly, you will be able to do this using the headings that were inserted from the <abbrRef
+abbr="vSFM"
+></abbrRef
+> file.</p
+><p
+>Put your cursor where you want to add a Table of Contents (TOC). From the <object
+type="menu"
+>References</object
+> ribbon, choose <object
+type="menu"
+>Custom Table of Contents...</object
+> .</p
+><p
+>The main dialogue gives very basic print and web preview, as well as basic options. From the <object
+type="menu"
+>Tab leader</object
+> option, choose dots, dashes or lines to help the reader connect the title and page number.</p
+><p
+>The <object
+type="menu"
+>Modify</object
+> dialogue box gives you access to modify the final formatting of the entries in the table of contents. These styles are listed as <object
+type="ttyped"
+>TOC1</object
+>, <object
+type="ttyped"
+>TOC2</object
+>, etc. You could modify them here (the most important parts will be the <object
+type="menu"
+>Line spacing</object
+>, <object
+type="menu"
+>Before</object
+>, and <object
+type="menu"
+>After</object
+> from the <object
+type="menu"
+>Format</object
+> &gt; <object
+type="menu"
+>Paragraph</object
+> dialogue, or from the Stylesheet Command Centre (see section <sectionRef
+sec="sStyleCommand"
+></sectionRef
+>).</p
+><p
+>What interests us most is the <object
+type="menu"
+>Options</object
+> window. You will see a list of all of your document's paragraph styles (but not character styles). As mentioned before, Headings 1-3 are the default styles for a table of contents, but you can change this. Remove the numbers beside the headings and choose the styles you wish to include in your <abbrRef
+abbr="vTOC"
+></abbrRef
+>. Add a <object
+type="ttyped"
+>1</object
+> for the most major heading, <object
+type="ttyped"
+>2</object
+> beside the next one, and <object
+type="ttyped"
+>3</object
+> for the third. Notice that you can double-assign numbers to combine two styles into one level.</p
+><p
+>Click <object
+type="menu"
+>OK</object
+> to create the table of contents. If you are only creating a monolingual table of contents, you may be done.</p
+><p
+>However if you added styles for national language translations to your <abbrRef
+abbr="vTOC"
+></abbrRef
+>, you may have a needless repetition of the same page numbers. If you want to clean this up, you can remove these page numbers, but unfortunately not from the interface, you need to dive into field codes<endnote
+id="nTOCCodes"
+><p
+>All I ever learned about <abbrRef
+abbr="vTOC"
+></abbrRef
+> fields, I learned here:<br
+></br
+></p
+><p
+><link
+href="http://www.techrepublic.com/article/use-words-toc-field-to-fine-tune-your-table-of-contents/"
+>http://www.techrepublic.com/article/use-words-toc-field-to-fine-tune-your-table-of-contents/ </link
+></p
+></endnote
+>.</p
+><p
+>Click in the new <abbrRef
+abbr="vTOC"
+></abbrRef
+> and press <object
+type="menu"
+>ALT</object
+> + <object
+type="menu"
+>F9</object
+>. This will show you a cryptic field code that defines the options of your <abbrRef
+abbr="vTOC"
+></abbrRef
+>.</p
+><p
+>To remove a single level's numbering, first find the heading number following the desired style (i.e. 2). Add <object
+type="ttyped"
+>\n 2-2</object
+> in the space between <object
+type="ttyped"
+>\z</object
+> and <object
+type="ttyped"
+>\t</object
+><endnote
+id="nNoNummy"
+><p
+>Oddly, the \n option only accepts a range (i.e. <object
+type="ttyped"
+>1-3</object
+>, <object
+type="ttyped"
+>2-4</object
+>), so <object
+type="ttyped"
+>\n 2</object
+> is not valid, but 1-1 or 2-2 are both valid ranges for one item.</p
+></endnote
+>.</p
+><figure
+id="fInsideATOC"
+><chart
+><img
+src="images/Inside%20a%20TOC.png"
+></img
+></chart
+><caption
+>Inside a Table of Contents Code</caption
+></figure
+><ol
+><li
+>Marks this field as a <abbrRef
+abbr="vTOC"
+></abbrRef
+> (required).</li
+><li
+>Makes each entry a hyperlink (recommended).</li
+><li
+>Hides leaders in web view.</li
+><li
+>Removes page numbers (and leaders) from level 2 (through 2).</li
+><li
+>Marks that <object
+type="menu"
+>Styles</object
+> will be used instead of <object
+type="menu"
+>Headings</object
+>.</li
+><li
+>The first style name.</li
+><li
+>The heading level of the first style.</li
+><li
+>The second style name.</li
+><li
+>The heading level of the second style.</li
+><li
+>The third style name.</li
+><li
+>The heading level of the third style.</li
+></ol
+><p
+>After editing the field, click inside the grey field and press <object
+type="menu"
+>ALT</object
+> + <object
+type="menu"
+>F9</object
+> again to check your work.</p
+></section2
+><section2
+id="sHeadFoot"
+><secTitle
+>Headers and Footers</secTitle
+><p
+>In a book, headers and footers can be quite complex. Page numbers start and restart in some sections. Some pages are meant to exclude page numbers and chapter titles and page numbers. Headers and footers may need to move to the left or right on alternating pages. Word can handle each of these situations, but it may take some fiddling.</p
+><section3
+id="sRunHead"
+><secTitle
+>Running Headers</secTitle
+><p
+>To help the reader, you may desire to show headers that show the current season and day. For example, we chose to use the day and season names as headers in a lectionary. As discussed in section <sectionRef
+sec="sRTFWord"
+></sectionRef
+>, Word can do Running Headers. This means that Word can automagically pull the most recent occurrence of a style and copy it into the header. See figure <figureRef
+figure="fheader"
+></figureRef
+> for an example layout.</p
+><figure
+id="fheader"
+><chart
+><img
+src="images/header.png"
+></img
+></chart
+><caption
+>Example layout for running headers</caption
+></figure
+><ol
+><li
+>Double click in the header.</li
+><li
+>Check the <object
+type="menu"
+>Different Odd and Even Pages</object
+> option<endnote
+id="nzoom1"
+><p
+>If you zoom out, there is some weirdness with <object
+type="menu"
+>Print Layout</object
+> mode in word, and it likes to show page one and two side by side, which will not be the case when printing. This caused some headaches until I learned not to trust Word. This is discussed here:</p
+><p
+><link
+href="https://superuser.com/questions/46782/two-page-view-in-word-shouldnt-the-first-page-be-on-the-right"
+>https://superuser.com/questions/46782/two-page-view-in-word-shouldnt-the-first-page-be-on-the-right</link
+></p
+></endnote
+>.</li
+><li
+>From the <object
+type="menu"
+>View</object
+> ribbon, check the box beside <object
+type="menu"
+>Ruler</object
+>.</li
+><li
+>Click the <img
+src="images/tabby.png"
+></img
+> icon to the left of the ruler several times until it becomes a right tab (<img
+src="images/tabbyrt.png"
+></img
+>).</li
+><li
+>Click on the ruler near the right margin and drag until the cursor lines up with the right margin (clicking where you want to put it will not work, but this does).<br
+></br
+><object
+type="tItalic"
+>This should give this result: </object
+><img
+src="images/tabbed.png"
+></img
+> .</li
+><li
+>Put the cursor at the start of the line.</li
+><li
+><object
+type="menu"
+>Insert</object
+> &gt; <object
+type="menu"
+>Quick Parts</object
+> &gt; <object
+type="menu"
+>Field</object
+>.</li
+><li
+>From the <object
+type="menu"
+>Field names</object
+> box, choose <object
+type="ttyped"
+>StyleRef</object
+>.</li
+><li
+>From the Style name: box, choose the style you want to insert<endnote
+id="nBottomToTop"
+><p
+>The <object
+type="menu"
+>Search from bottom of page to top</object
+> option could be useful on the right page, as in the headwords of a dictionary.</p
+></endnote
+>.</li
+><li
+>Click <object
+type="menu"
+>OK</object
+>.</li
+><li
+>Press the <object
+type="menu"
+>Tab</object
+> key.</li
+><li
+>Repeat steps 7-10 for the second style.</li
+><li
+>Go to the next page, and repeat steps 3-12 with the styles in reverse.</li
+></ol
+></section3
+><section3
+id="sNoHead"
+><secTitle
+>Hiding Headers and Footers on Some Pages</secTitle
+><p
+>Usually the first page of a chapter does not have page numbers, and the example documents start new "chapters" at every season. To accomplish this, you will need to insert a <object
+type="menu"
+>Section Break</object
+> before each chapter (in this case, season). If you have previously added a page break to this style, you may need to remove it.</p
+><ol
+><li
+>Double-click on the header of the document.</li
+><li
+>Check the <object
+type="menu"
+>Different First Page</object
+> option.</li
+><li
+>Scroll or search to find your first chapter, or the section after your Front Matter.</li
+><li
+>Enable show hidden characters (<object
+type="menu"
+>¶</object
+>) from the <object
+type="menu"
+>Home</object
+> ribbon.</li
+><li
+>Add a <object
+type="menu"
+>Next Page Section break</object
+> from <object
+type="menu"
+>Insert</object
+> &gt; <object
+type="menu"
+>Break</object
+> &gt; <object
+type="menu"
+>Next Page Section Break</object
+>.</li
+><li
+>You may have to repeat some of these steps in each section's header.</li
+></ol
+><p
+>If you want to leave the headers on seasons, but find that the most recent Holy Day "bleeds" onto the first page of the next season, there is a workaround.</p
+><ol
+><li
+>On each Season page, add an empty new line and format it with the same Paragraph format that is used for Season headings.<br
+></br
+><object
+type="tItalic"
+>The heading will disappear from the header.</object
+></li
+><li
+>If this empty line is inconspicuous, you may leave it. Otherwise, use Word's Hidden Text option.<ol
+><li
+>The <object
+type="menu"
+>Hidden</object
+> option is listed among the <object
+type="menu"
+>Effects</object
+> in the <object
+type="menu"
+>Font</object
+> dialogue.</li
+><li
+>Alternately, you can add a <object
+type="menu"
+>Hidden Text</object
+> button to the quick access toolbar.<endnote
+id="n-NeedsALabel-.xlingpaper.1..styledPaper.1..lingPaper.1..chapterInCollection.3..section1.5..section2.8..section3.2..ol.2..li.2..ol.1..li.2..endnote.1."
+><p
+>Microsoft provides instructions here:<br
+></br
+><link
+href="https://support.office.com/en-us/article/Add-commands-to-the-Quick-Access-Toolbar-f733e1a6-53b1-4388-a609-173d03895ab7"
+>https://support.office.com/en-us/article/Add-commands-to-the-Quick-Access-Toolbar-f733e1a6-53b1-4388-<br
+></br
+>a609-173d03895ab</link
+></p
+></endnote
+></li
+></ol
+></li
+></ol
+></section3
+><section3
+id="sPagenum"
+><secTitle
+>Page Numbers</secTitle
+><p
+>You will most likely want to add page numbers. Choosing to centre them at the bottom of the page will greatly simplify things as you won't have to bother with moving them to the left and right like headers for facing pages. Page numbers can be added from the <object
+type="menu"
+>Insert</object
+> ribbon, and you will be able to choose the placement.</p
+></section3
+></section2
+><section2
+id="sTextDec"
+><secTitle
+>Text Decorations</secTitle
+><p
+>If you add a marker such as <object
+type="ttyped"
+>\p ---</object
+> in your Bible Module specification, you can replace it with an actual line using this trick<endnote
+id="nMultLines"
+><p
+>If you want different thicknesses of lines in different places, you can use different numbers of dashes (3,5,7, etc.). Just make sure to replace the longest sets of dashes first, or you might make some mistakes.</p
+></endnote
+>:</p
+><ul
+><li
+>Open a new Word document.</li
+><li
+><object
+type="menu"
+>Insert</object
+> &gt; <object
+type="menu"
+>Shape</object
+> &gt; <object
+type="menu"
+>Line</object
+>.</li
+><li
+>Draw on the page to create a horizontal line (holding <object
+type="menu"
+>Shift</object
+> while drawing will force the line to 45° increments).</li
+><li
+>Click on the line.</li
+><li
+><object
+type="menu"
+>Format</object
+> &gt; <object
+type="menu"
+>Shape outline</object
+><ul
+><li
+>Choose a <object
+type="menu"
+>Colour</object
+>.</li
+><li
+>Choose a <object
+type="menu"
+>Weight</object
+>.</li
+><li
+>Choose a dash pattern (if desired).</li
+></ul
+></li
+><li
+>Select and copy the line to the clipboard.</li
+><li
+>Return to your main document.</li
+><li
+><object
+type="menu"
+>Home</object
+> &gt; <object
+type="menu"
+>Replace</object
+>.</li
+><li
+>Put <object
+type="menu"
+>---</object
+>, or whatever you used in the <object
+type="menu"
+>Find what</object
+> field.</li
+><li
+>Type <object
+type="ttyped"
+>^c</object
+> into the Replace with field (this code means "contents of the clipboard"<endnote
+id="nReplacers"
+><p
+>There are lots of useful codes under the <object
+type="menu"
+>Special</object
+> button. Take this time to check them out.</p
+></endnote
+>).</li
+><li
+>Click <object
+type="menu"
+>Replace</object
+> or <object
+type="menu"
+>Replace All</object
+>.<br
+></br
+><object
+type="tItalic"
+>If all went well, each instance will be replaced with a line.</object
+></li
+></ul
+></section2
+><section2
+id="sPagination"
+><secTitle
+>Pagination</secTitle
+><p
+>Pagination refers to how the text falls on each printed page. At this point, we go beyond the global style changes of previous sections and into the realm of manual changes to specific sections. Any changes that modify space (page size, margins, headers, footers, styles or content) should be completed before this stage, or you will have to do this again.</p
+><p
+>You should have already activated <object
+type="menu"
+>widow and orphan control</object
+> for paragraphs, marked titles with <object
+type="menu"
+>Keep with next</object
+>, and set a <object
+type="menu"
+>page break</object
+> or <object
+type="menu"
+>Next page section break</object
+> before the start of each new section (see section <sectionRef
+sec="sPageBreak"
+></sectionRef
+>). If so, Word has processed your document to avoid single lines jumping to the next page, but you can do better manually. The goal of this task is to make sure that titles and text break at natural points, for titles to directly precede the text they title, and without lines being sent awkwardly to the next page. This section is a course in Smushology<endnote
+id="nSmushology"
+><p
+>Smushology: The art of compressing and expanding text to change pagination without it being noticeable. Yes, this is a made-up term.</p
+></endnote
+>.</p
+><figure
+id="fSmushology"
+><chart
+><dl
+><dt
+>Rule 1: Workflow</dt
+><dd
+>Work from the top of the document to the bottom. This will save you work.</dd
+><dt
+>Rule 2: Occam's Razor</dt
+><dd
+>Only change the things you need to, and make the slightest changes possible to achieve your goals.</dd
+><dt
+>Rule 3: Sphere of influence</dt
+><dd
+>Making a minor change to a large block of text is less obvious than making a drastic change to a small section of text.</dd
+><dt
+>Rule 4: Flow</dt
+><dd
+>Use line and inter-paragraph spacing if possible to move lines from one page to another. Only use kerning if absolutely necessary. Don't ever change font size between paragraphs or inside a paragraph.</dd
+><dt
+>Rule 5: Image Proportions</dt
+><dd
+>Don't distort the proportions of photos, ever! Shrink or crop the image instead.</dd
+></dl
+></chart
+><caption
+>Rules of Smushology</caption
+></figure
+><p
+>Since your document probably contains page breaks (see section <sectionRef
+sec="sPageBreak"
+></sectionRef
+>), minor changes to each section only affect the placement of later sections of the document if they add or remove a page. For example, adding a line in one section shouldn't bump the next section down a line. Taking advantage of this will greatly limit the pagination changes that need to be made.</p
+><section3
+id="sPage"
+><secTitle
+>Blank Pages</secTitle
+><p
+>You may want to add blank pages to your document, and this can be done by inserting <object
+type="menu"
+>Page breaks</object
+> or <object
+type="menu"
+>Next Page Section Breaks</object
+> available under <object
+type="menu"
+>Layout</object
+> &gt; <object
+type="menu"
+>Break</object
+>.</p
+><p
+>You may also want to start text on the right page for new sections<endnote
+id="nzoom2"
+><p
+>If you zoom out, there is some weirdness with <object
+type="menu"
+>Print Layout</object
+> mode in word, and it likes to show page one and two side by side, which will not be the case when printing. This caused some headaches until I learned not to trust Word. This is discussed here:</p
+><p
+><link
+href="https://superuser.com/questions/46782/two-page-view-in-word-shouldnt-the-first-page-be-on-the-right"
+>https://superuser.com/questions/46782/two-page-view-in-word-shouldnt-the-first-page-be-on-the-right</link
+></p
+></endnote
+>This is possible using <object
+type="menu"
+>Even Page</object
+> and <object
+type="menu"
+>Odd Page</object
+> section breaks available under <object
+type="menu"
+>Layout</object
+> &gt; <object
+type="menu"
+>Break</object
+>.</p
+></section3
+><section3
+id="sSmushSpace"
+><secTitle
+>Removing or Adding Space Manually</secTitle
+><p
+>This is the most obvious method of Smushology, one can remove empty lines or combine contiguous lines of text to save space. Remember that you cannot combine two paragraph different styles on one line. Also, avoid combining headings that are used in the headers.</p
+><p
+>Alternately, one can add lines or page breaks (<object
+type="menu"
+>Ctrl</object
+> + <object
+type="menu"
+>Enter</object
+> inserts a page break at the cursor, use this instead of pressing enter several times). If you want to move text to a new line but not create a new paragraph, use <object
+type="menu"
+>Shift</object
+> + <object
+type="menu"
+>Enter</object
+> to insert a line break. This is recommended for splitting long titles at a convenient place.</p
+></section3
+><section3
+id="sSmushLine"
+><secTitle
+>Line Spacing</secTitle
+><p
+>As stated in rule 3 of figure <figureRef
+figure="fSmushology"
+></figureRef
+>, slight tweaks in line spacing over a large enough swath of text can move a few lines of text from one page to another. Try selecting a whole reading and tweaking the line spacing incrementally. In practise, changes of ±0.05 lines won't be noticeable to the untrained eye, but start with increments of 0.01 and work your way up until you get the desired result.</p
+></section3
+><section3
+id="sKerning"
+><secTitle
+>Kerning and Spacing</secTitle
+><p
+>Kerning refers to the spacing between letters, especially letters that overhang or underhang one another (notice the difference in spacing between "AV" and "<object
+type="ttyped"
+>AV"</object
+>). Enabling kerning (found under <object
+type="menu"
+>Fonts</object
+> &gt; <object
+type="menu"
+>Advanced</object
+>) will compress text, but only in places that make visual sense. Spacing has much less finesse, and can get crowded beyond compression of 0.1 pt or overly stretched beyond expansion of 0.3pt. It is best only to use this method to make headings fit on one line, as excessive compression makes the text harder to read.</p
+></section3
+></section2
+><section2
+id="sCoverArt"
+><secTitle
+>Cover Art</secTitle
+><p
+>Using available software tools, create a <abbrRef
+abbr="vPDF"
+></abbrRef
+> of the front cover, spine and back cover. Your printer may want these elements created in separate files, as the width of the book's spine is currently unknown. Depending on your desire and budget, this could be done in Word, Publisher, or Photoshop.</p
+></section2
+></section1
+><section1
+id="sPrepPrinting"
+><secTitle
+>Printing the Bible Module</secTitle
+><p
+>If you have a local print shop, you may need to prepare the book to their specifications, or risk getting an unsatisfactory result. The safest method, to avoid introducing font and layout issues, is to create a properly formatted <abbrRef
+abbr="vPDF"
+></abbrRef
+> that the printer can easily print and bind. Without getting too far into bookbinding lore and legend, there are (at least) 2 major methods of binding a large book. One is a "perfect binding" and the other is "saddle stitching"<endnote
+id="nSaddlePerfect"
+><p
+>There is a good discussion of the trade-offs between the two methods at <br
+></br
+><link
+href="https://www.paperspecs.com/paper-news/the-dilemma-stitch-or-glue/"
+>https://www.paperspecs.com/paper-news/the-dilemma-stitch-or-glue/</link
+>, along with some explanatory images.</p
+></endnote
+>. The next sections will explain how to create the <abbrRef
+abbr="vPDF"
+></abbrRef
+> for each of these two methods.</p
+><section2
+id="sPerfect"
+><secTitle
+>Create <abbrRef
+abbr="vPDF"
+></abbrRef
+>s for Perfect Binding</secTitle
+><p
+>With perfect binding, a stack of loose (or folded) sheets is essentially glued to the binding with heated glue. This method produces a flat-lying book, but is more expensive as it requires special machinery. All you probably need to provide to the printer for perfect binding is a sequential <abbrRef
+abbr="vPDF"
+></abbrRef
+> (page 1, page 2, page 3, page 4) on the right paper size and a rather large internal margin. This can be done in Microsoft Word very easily. Simply set your margins appropriately, and export (or print) the document to <abbrRef
+abbr="vPDF"
+></abbrRef
+>.</p
+><p
+>If the printer wants to use folded sheets, you'll need another layout that is beyond the scope of this paper.</p
+></section2
+><section2
+id="sSaddle"
+><secTitle
+>Create <abbrRef
+abbr="vPDF"
+></abbrRef
+>s for Saddle Stitching</secTitle
+><p
+>A cheaper binding option is "saddle stitching", where a stack of booklets are stitched (or stapled) into the binding. Each booklet is made up of a few leafs (sheets) or paper. Breaking up the pages into multiple groups allows the printer to combine them into a squarish binding. Larger booklets require less stitching, but incur a growing "creep" where the stack of pages inside the booklet make the internal and external margins wander. Thicker paper worsens this effect. For the a large Bible Module (a lectionary), we settled on booklets of no more than 8 sheets of A4 paper, and as we printed on both sides of the page, this meant a maximum of 32 A5 pages per booklet. (Due to the genius of A4 is exactly twice the size of A5 paper.)</p
+><p
+>Simply enabling the Booklet option in Word would have printed a copy of the book where the first and last pages are on facing sides of the same sheet. Now imagine neatly folding seventy sheets of paper into one booklet, and you will see why this is a problem. What was needed were individual booklets for small sets of pages. Booklet one would contain pages 1-32, booklet two would contain pages 33-64, and so on. How can one create this?</p
+><section3
+id="sPDFDroplet"
+><secTitle
+>PDFDroplet</secTitle
+><p
+>PDFDroplet is wonderfully simple booklet creation tool from <abbrRef
+abbr="vSIL"
+></abbrRef
+> and Palaso. Simply open a sequential <abbrRef
+abbr="vPDF"
+></abbrRef
+> file, choose a paper size and layout, and export a booked <abbrRef
+abbr="vPDF"
+></abbrRef
+> that can be printed immediately and folded. You can even export the file as a mirror image, which is a useful step for some printers. To prepare each section, you first have to "print" or export a <abbrRef
+abbr="vPDF"
+></abbrRef
+> from the sequential <abbrRef
+abbr="vPDF"
+></abbrRef
+> for booklet one (pages 1-32), export a <abbrRef
+abbr="vPDF"
+></abbrRef
+> for booklet 2 (pages 33-64), and so on.</p
+><p
+>In Microsoft Word:</p
+><ol
+><li
+>From the <object
+type="menu"
+>File</object
+> menu, choose <object
+type="menu"
+>Export</object
+>.</li
+><li
+><object
+type="menu"
+>Create <abbrRef
+abbr="vPDF"
+></abbrRef
+>/XPS document</object
+>.</li
+><li
+>Click <object
+type="menu"
+>Options</object
+>.</li
+><li
+>Choose the page numbers to export in the <object
+type="menu"
+>Page Range</object
+> section.<br
+></br
+><img
+src="images/pages.png"
+></img
+></li
+><li
+>Click <object
+type="menu"
+>OK</object
+>.</li
+><li
+>Click <object
+type="menu"
+>Publish</object
+>.</li
+><li
+>Repeat for next batch of pages until done.</li
+></ol
+><p
+>It was a repetitive process that took a while, but it saved us days of manual layout by the print shop manager. The next step was to create a non-mirrored booklet <abbrRef
+abbr="vPDF"
+></abbrRef
+> of each file for the final mock-up and a mirrored copy for the final print process.</p
+><ol
+><li
+>Open PDFDroplet.</li
+><li
+>Open the sequential <abbrRef
+abbr="vPDF"
+></abbrRef
+> you just created or drag and drop the file into the PDFDroplet Window.</li
+><li
+>Choose Booklet.</li
+><li
+>Save the new <abbrRef
+abbr="vPDF"
+></abbrRef
+> for printing.</li
+><li
+>If desired, create a mirrored copy for the print shop.</li
+></ol
+><p
+>Copy these files to a <abbrRef
+abbr="vUSB"
+></abbrRef
+> key and send them off to the print shop.</p
+></section3
+><section3
+id="sPDFBooklet"
+><secTitle
+>PDFBooklet</secTitle
+><p
+>PDFBooklet<endnote
+id="nPDFBooklet"
+><p
+>PDFBooklet is available at <link
+href="http://pdfbooklet.sourceforge.net/"
+>http://pdfbooklet.sourceforge.net/</link
+>. There are some bugs in this open-source software, but the developer is quite responsive and immediately solved a recent bug that found by the author.</p
+></endnote
+> is an alternative that was found after the second book was printed. What it lacks in smooth interface and simplicity, it makes up for in complex manual control. The most interesting feature is "Leafs in a booklet", which allows the user to choose the number of pages in each mini-booklet, and the software orders the pages accordingly in the output. This can be a time-saver if the files come out right.</p
+><ol
+><li
+>Print or export a normal sequential <abbrRef
+abbr="vPDF"
+></abbrRef
+> from Word.</li
+><li
+>Open PDFBooklet.</li
+><li
+>Open the sequential <abbrRef
+abbr="vPDF"
+></abbrRef
+> you just created.</li
+><li
+>Choose the number of leaves in a booklet.</li
+><li
+>Click Go and check your output.</li
+><li
+>If desired, create a mirrored copy for the print shop.</li
+></ol
+><p
+>If all went well, you now can pass this output to the printer.</p
+></section3
+></section2
+><section2
+id="sProofread"
+><secTitle
+>Proofing the Mock-up</secTitle
+><p
+>Stop the presses! You're not done yet. Once the printer returns with the mock-up, now is the time for the final review to make sure that no new errors were introduced by the printing process. The team may find other errors as well, and this is the last chance to fix them, and you may have to re-do the booking if you find errors. Take the time to review it carefully.</p
+></section2
+><section2
+id="sFinalPrint"
+><secTitle
+>Final Printing</secTitle
+><p
+>Congratulations! Now you're there. Sit back and wait for the final printing.</p
+></section2
+></section1
+><section1
+id="sLecNext"
+><secTitle
+>Printing the Same Bible Module in another language</secTitle
+><p
+>This process was designed to be repeatable with minimal effort the second and third time around. If we look back, the tasks that took the most time were sections <sectionRef
+sec="sCreateBM"
+></sectionRef
+> and <sectionRef
+sec="sTypesetRTF"
+></sectionRef
+>. This section shows you how to recapture some of the work done above for later books, and even for other language projects.</p
+><section2
+id="sSaveShareModule"
+><secTitle
+>Saving a copy of your Bible Module for Sharing</secTitle
+><p
+>As discussed in section <sectionRef
+sec="sCreateBM"
+></sectionRef
+>, a Bible module is similar to a Shell Book. You can now take your completed Bible module and share it with other projects. You just need to collect a file from your computer.</p
+><ul
+><li
+>In Paratext 8, Bible Modules are stored in your Paratext 8 Projects folder, usually <object
+type="ttyped"
+>C:\My Paratext 8 Projects\_Modules</object
+>. If you have made modifications to the module after importing it, the latest copy will be found under <object
+type="ttyped"
+>C:\My Paratext 8 Projects\[Your Project]\modules</object
+>.</li
+><li
+>In Paratext 7, the Bible Modules are stored in your Paratext Projects folder, usually <object
+type="ttyped"
+>C:\My Paratext Projects\modules</object
+>. If you have made modifications to the module after importing it, the latest copy will be found under <object
+type="ttyped"
+>C:\My Paratext Projects\[Your Project]\modules</object
+>.</li
+></ul
+><p
+>Simply copy the <abbrRef
+abbr="vSFM"
+></abbrRef
+> file of your Bible Module, or an earlier version with national language content to a computer with the new project. You can now follow the first steps in section <sectionRef
+sec="sBlankMod"
+></sectionRef
+> and choose the option <object
+type="menu"
+>Copy from specification file</object
+>.</p
+></section2
+><section2
+id="sRebuildStyles"
+><secTitle
+>Rebuild Styles from a Previous Document</secTitle
+><p
+>Microsoft doesn't heavily advertise this, but Microsoft Word's <object
+type="ttyped"
+>.docx</object
+> format is actually a zip file containing all of the text, metadata, and attachments in a reasonably accessible format. This is why it was suggested in section <sectionRef
+sec="sRTFDocX"
+></sectionRef
+> to convert to <object
+type="ttyped"
+>.docx</object
+> and it can be now used to our advantage.</p
+><p
+>Using a compression tool such as 7-Zip<endnote
+id="n7ZIP"
+><p
+>A free and open-source compression tool for Windows that is an alternative to WinZip, WinRar, and other similar tools. Available at <link
+href="http://www.7-zip.org/"
+>http://www.7-zip.org/</link
+>.</p
+></endnote
+>, one can swap out elements of a document, including style sheets<endnote
+id="nUse7Zip"
+><p
+>It should be noted here that this is an unsupported method which in our case offers a shortcut. Normally, this would not work, but all files created from Paratext using the same <abbrRef
+abbr="vSFM"
+></abbrRef
+> markers will contain the same list of styles. The supported method of copying styles is explained here: <link
+href="https://www.extendoffice.com/documents/word/1004-word-import-styles.html"
+>https://www.extendoffice.com/documents/word/1004-word-import-styles.html</link
+> .</p
+></endnote
+>. This means that <object
+type="tItalic"
+>nearly all</object
+> of the style customisations that you made to the document can be copied between documents.</p
+><ol
+><li
+>Install 7-Zip, as well as the suggested shell extension.</li
+><li
+>Be sure that Microsoft Word is closed.</li
+><li
+>Right-click on a <object
+type="ttyped"
+>.docx</object
+> file and choose <object
+type="menu"
+>7-Zip</object
+> &gt; <object
+type="menu"
+>Open Archive</object
+>.<br
+></br
+><img
+src="images/7zipopen.png"
+></img
+></li
+><li
+>Open the <object
+type="menu"
+>word</object
+> folder.<br
+></br
+><img
+src="images/inside%207zip.png"
+></img
+></li
+><li
+>Drag the <object
+type="ttyped"
+>styles.xml</object
+> document of your completed Bible Module from 7-Zip out to a temporary location on your hard drive.<br
+></br
+><img
+src="images/insideword7zip.png"
+></img
+></li
+><li
+>Repeat steps two and three with your target document.</li
+><li
+>Drag the <object
+type="ttyped"
+>styles.xml</object
+> document of your completed Bible Module into the newly exported <object
+type="ttyped"
+>.docx</object
+> file.</li
+><li
+>Close <object
+type="tmenu"
+>7-Zip</object
+> and open the Word document with the newly replaced stylesheet.</li
+><li
+>If all went well, you have just skipped the steps in sections <sectionRef
+sec="sBasicForm"
+></sectionRef
+> and <sectionRef
+sec="sStyleSwap"
+></sectionRef
+>, and your document will have identical formatting to the previous one.</li
+><li
+>You still need to troubleshoot your document's pagination, see section <sectionRef
+sec="sPagination"
+></sectionRef
+>.</li
+></ol
+></section2
+></section1
+></chapter
+></part
+><backMatter
+><glossary
+label="Abbreviations"
+><abbreviationsShownHere
+></abbreviationsShownHere
+></glossary
+><abbreviations
+><abbreviation
+id="vCCT"
+><abbrInLang
+lang="en"
+><abbrTerm
+>CCT</abbrTerm
+><abbrDefinition
+>Consultation on Common Texts</abbrDefinition
+></abbrInLang
+></abbreviation
+><abbreviation
+id="vDOCX"
+><abbrInLang
+lang="en"
+><abbrTerm
+>DOCX</abbrTerm
+><abbrDefinition
+>Word Document, Office 2007 or later.</abbrDefinition
+></abbrInLang
+></abbreviation
+><abbreviation
+id="vEELC"
+><abbrInLang
+lang="en"
+><abbrTerm
+>EELC</abbrTerm
+><abbrDefinition
+>Eglise Evangelique Lutherienne du Cameroun</abbrDefinition
+></abbrInLang
+></abbreviation
+><abbreviation
+id="vLBT"
+><abbrInLang
+lang="en"
+><abbrTerm
+>LBT</abbrTerm
+><abbrDefinition
+>Lutheran Bible Translators</abbrDefinition
+></abbrInLang
+></abbreviation
+><abbreviation
+id="vLBTC"
+><abbrInLang
+lang="en"
+><abbrTerm
+>LBTC</abbrTerm
+><abbrDefinition
+>Lutheran Bible Translators Cameroon</abbrDefinition
+></abbrInLang
+></abbreviation
+><abbreviation
+id="vNAB"
+><abbrInLang
+lang="en"
+><abbrTerm
+>NAB</abbrTerm
+><abbrDefinition
+>New American Bible</abbrDefinition
+></abbrInLang
+></abbreviation
+><abbreviation
+id="vNRSV"
+><abbrInLang
+lang="en"
+><abbrTerm
+>NRSV</abbrTerm
+><abbrDefinition
+>New Revised Standard Version</abbrDefinition
+></abbrInLang
+></abbreviation
+><abbreviation
+id="vNT"
+><abbrInLang
+lang="en"
+><abbrTerm
+>NT</abbrTerm
+><abbrDefinition
+>New Testament</abbrDefinition
+></abbrInLang
+></abbreviation
+><abbreviation
+id="vOT"
+><abbrInLang
+lang="en"
+><abbrTerm
+>OT</abbrTerm
+><abbrDefinition
+>Old Testament</abbrDefinition
+></abbrInLang
+></abbreviation
+><abbreviation
+id="vPA"
+><abbrInLang
+lang="en"
+><abbrTerm
+>PA</abbrTerm
+><abbrDefinition
+>Publishing Assistant</abbrDefinition
+></abbrInLang
+></abbreviation
+><abbreviation
+id="vPDF"
+><abbrInLang
+lang="en"
+><abbrTerm
+>PDF</abbrTerm
+><abbrDefinition
+>Portable Document Format</abbrDefinition
+></abbrInLang
+></abbreviation
+><abbreviation
+id="vRAM"
+><abbrInLang
+lang="en"
+><abbrTerm
+>RAM</abbrTerm
+><abbrDefinition
+>Random Access Memory</abbrDefinition
+></abbrInLang
+></abbreviation
+><abbreviation
+id="vRCL"
+><abbrInLang
+lang="en"
+><abbrTerm
+>RCL</abbrTerm
+><abbrDefinition
+>Revised Common Lectionary</abbrDefinition
+></abbrInLang
+></abbreviation
+><abbreviation
+id="vRTF"
+><abbrInLang
+lang="en"
+><abbrTerm
+>RTF</abbrTerm
+><abbrDefinition
+>Rich Text File</abbrDefinition
+></abbrInLang
+></abbreviation
+><abbreviation
+id="vSFM"
+><abbrInLang
+lang="en"
+><abbrTerm
+>USFM</abbrTerm
+><abbrDefinition
+>Standard Format Markers</abbrDefinition
+></abbrInLang
+></abbreviation
+><abbreviation
+id="vSIL"
+><abbrInLang
+lang="en"
+><abbrTerm
+>SIL</abbrTerm
+><abbrDefinition
+>SIL International</abbrDefinition
+></abbrInLang
+></abbreviation
+><abbreviation
+id="vTOC"
+><abbrInLang
+lang="en"
+><abbrTerm
+>TOC</abbrTerm
+><abbrDefinition
+>Table of Contents</abbrDefinition
+></abbrInLang
+></abbreviation
+><abbreviation
+id="vUSB"
+><abbrInLang
+lang="en"
+><abbrTerm
+>USB</abbrTerm
+><abbrDefinition
+>Universal Serial Bus</abbrDefinition
+></abbrInLang
+></abbreviation
+><abbreviation
+id="vUSFM"
+><abbrInLang
+lang="en"
+><abbrTerm
+>USFM</abbrTerm
+><abbrDefinition
+>Unified Standard Format Markers</abbrDefinition
+></abbrInLang
+></abbreviation
+></abbreviations
+><glossaryTerms
+><glossaryTerm
+id="nbsp"
+><glossaryTermInLang
+><glossaryTermTerm
+>no-break space</glossaryTermTerm
+><glossaryTermDefinition
+>[ ] Unicode character number U+00A0 <citation
+page="269"
+paren="citationBoth"
+ref="rU10Core"
+></citation
+>, also known as non-breaking space, this is a special space inserted between elements in a text that would be confusing to the reader if separated by a line break, such as "1 Kings". Though rare in English publications, they are common in languages such as French where some punctuation is set off by a space.</glossaryTermDefinition
+></glossaryTermInLang
+></glossaryTerm
+><glossaryTerm
+id="readings"
+><glossaryTermInLang
+><glossaryTermTerm
+>Lectionary Readings</glossaryTermTerm
+><glossaryTermDefinition
+></glossaryTermDefinition
+></glossaryTermInLang
+></glossaryTerm
+><glossaryTerm
+id="saddle"
+><glossaryTermInLang
+><glossaryTermTerm
+>saddle stitching</glossaryTermTerm
+><glossaryTermDefinition
+>http://www.formaxprinting.com/blog/2009/12/printing-lingo-what-does-saddle-stitch-mean/</glossaryTermDefinition
+></glossaryTermInLang
+></glossaryTerm
+></glossaryTerms
+><endnotes
+></endnotes
+><references
+><refAuthor
+citename="Just"
+name="Just, Felix"
+><refWork
+id="rJustCP"
+><refDate
+>1998</refDate
+><refTitle
+>The Lectionary for Mass</refTitle
+><webPage
+><url
+>http://catholic-resources.org/Lectionary/1998USL.htm</url
+><dateAccessed
+>Oct 1, 2017</dateAccessed
+></webPage
+></refWork
+><refWork
+id="rJustOver"
+><refDate
+>1998</refDate
+><refTitle
+>Overview</refTitle
+><webPage
+><url
+>http://catholic-resources.org/Lectionary/Overview.htm</url
+><dateAccessed
+>Oct 1, 2017</dateAccessed
+></webPage
+></refWork
+><refWork
+id="rJustMain"
+><refDate
+>1998</refDate
+><refTitle
+>The Lectionary for Mass</refTitle
+><webPage
+><url
+>http://catholic-resources.org/Lectionary/</url
+><dateAccessed
+>Oct 1, 2017</dateAccessed
+></webPage
+></refWork
+></refAuthor
+><refAuthor
+citename="CIETBY"
+name="CIETBY"
+><refWork
+id="rLecYemba2017"
+><refDate
+>2017</refDate
+><refTitle
+>Textes de Dimanche Année A: Mois de Septembre et Octobre 2017</refTitle
+><book
+><edition
+>September/October 20̍17</edition
+><location
+>Dschang, West Region, Cameroon</location
+><publisher
+>CIETBY</publisher
+></book
+></refWork
+></refAuthor
+><refAuthor
+citename="Common Texts"
+name="Common Texts"
+><refWork
+id="rCTHome"
+><refDate
+>2015</refDate
+><refTitle
+>Consultation on Common Texts</refTitle
+><webPage
+><url
+>http://www.commontexts.org</url
+><dateAccessed
+>October 2, 2017</dateAccessed
+></webPage
+></refWork
+><refWork
+id="rCTIntro"
+><refDate
+>2015</refDate
+><refTitle
+>The Revised Common Lectionary, Consultation on Common Texts</refTitle
+><webPage
+><url
+>www.commontexts.org/wp-content/uploads/2015/11/RCL_Introduction_Web.pdf</url
+><dateAccessed
+>October 2, 2017</dateAccessed
+></webPage
+></refWork
+><refWork
+id="rCommonTexts"
+><refDate
+>2015</refDate
+><refTitle
+>Revised Common Lectionary Permissions Policy</refTitle
+><webPage
+><url
+>http://www.commontexts.org/rcl/permissions/</url
+><dateAccessed
+>August 14, 2017</dateAccessed
+></webPage
+></refWork
+><refWork
+id="rCTMembers"
+><refDate
+>2015</refDate
+><refTitle
+>Member Churches</refTitle
+><webPage
+><url
+>http://www.commontexts.org/members/</url
+><dateAccessed
+>August 14, 2017</dateAccessed
+></webPage
+></refWork
+></refAuthor
+><refAuthor
+citename="COSTBY"
+name="COSTBY"
+><refWork
+id="rLecYemba2008"
+><refDate
+>2008</refDate
+><refTitle
+>Textes de Dimanche En Yemba: Mois de Novembre 2008</refTitle
+><book
+><edition
+>November 2008</edition
+><location
+>Dschang, West Region, Cameroon</location
+><publisher
+>COSTBY</publisher
+></book
+></refWork
+></refAuthor
+><refAuthor
+citename="Kliever"
+name="Kliever, Janie"
+><refWork
+id="rFonts"
+><refDate
+>2015</refDate
+><refTitle
+>10 Golden Rules You Should Live By When Combining Fonts: Tips From a Designer</refTitle
+><webPage
+><url
+>https://designschool.canva.com/blog/combining-fonts-10-must-know-tips-from-a-designer/</url
+><dateAccessed
+>Sep. 17, 2017</dateAccessed
+></webPage
+></refWork
+></refAuthor
+><refAuthor
+citename="Paratext"
+name="Paratext"
+><refWork
+id="rPA"
+><refDate
+>2017</refDate
+><refTitle
+>Publishing Assistant [Computer Program]</refTitle
+><webPage
+><institution
+>United Bible Societies and SIL International</institution
+><url
+>http://paratext.org/about/pa</url
+><dateAccessed
+>Aug 14, 2017</dateAccessed
+></webPage
+></refWork
+><refWork
+id="rPT7"
+><refDate
+>2017</refDate
+><refTitle
+>Paratext 7.5.100.87 [Computer Program]</refTitle
+><webPage
+><institution
+>United Bible Societies and SIL International</institution
+><url
+>http://www.paratext.org</url
+><dateAccessed
+>Aug 14, 2017</dateAccessed
+></webPage
+></refWork
+><refWork
+id="rPT8"
+><refDate
+>2017</refDate
+><refTitle
+>Paratext 8.0 [Computer Program]</refTitle
+><webPage
+><institution
+>United Bible Societies and SIL International</institution
+><url
+>http://www.paratext.org</url
+><dateAccessed
+>Aug 14, 2017</dateAccessed
+></webPage
+></refWork
+><refWork
+id="rUSFM"
+><refDate
+>2017</refDate
+><refTitle
+>USFM - Unified Standard Format Markers</refTitle
+><webPage
+><institution
+>United Bible Societies and SIL International</institution
+><url
+>http://paratext.org/about/usfm</url
+><dateAccessed
+>Sep 17, 2017</dateAccessed
+></webPage
+></refWork
+></refAuthor
+><refAuthor
+citename="Quinn"
+name="Quinn, Frank C."
+><refWork
+id="rRomLec"
+><refDate
+>1994</refDate
+><refTitle
+>The Roman Lectionary and the Scriptures Read in Church</refTitle
+><article
+><jTitle
+>National Catholic Reporter</jTitle
+><jVol
+>35</jVol
+><jIssueNumber
+>5</jIssueNumber
+></article
+></refWork
+></refAuthor
+><refAuthor
+citename="Ring"
+name="Ring, Alexander"
+><refWork
+id="rPath"
+><refDate
+>1998</refDate
+><refTitle
+>The Path of Understanding: The Development of Lectionaries and Their Use in the Lutheran Church</refTitle
+><paper
+><conference
+>Evangelical Lutheran Synod General Pastoral Conference</conference
+><location
+>Tacoma , WA</location
+><url
+>https://www.blc.edu/comm/gargy/gargy1/AlexRing.gpc.html</url
+></paper
+></refWork
+><refWork
+id="rRingu"
+><refDate
+></refDate
+><refTitle
+>"."</refTitle
+><proceedings
+><procTitle
+>Evangelical Lutheran Synod General Pastoral Conference</procTitle
+><location
+>Tacoma , WA</location
+><url
+>https://www.blc.edu/comm/gargy/gargy1/AlexRing.gpc.html</url
+></proceedings
+></refWork
+></refAuthor
+><refAuthor
+citename="Unicode"
+name="Unicode, Inc"
+><refWork
+id="rU10Core"
+><refDate
+>2017</refDate
+><refTitle
+>The Unicode® Standard Version 10.0 – Core Specification</refTitle
+><ms
+><institution
+>Unicode Consortium</institution
+><url
+>http://www.unicode.org/versions/Unicode10.0.0/ch06.pdf</url
+><dateAccessed
+>Aug 14, 2017</dateAccessed
+></ms
+></refWork
+></refAuthor
+><refAuthor
+citename="Vanderbilt"
+name="Vanderbilt Divinity Library"
+><refWork
+id="rVanderFAQ"
+><refDate
+>2017</refDate
+><refTitle
+>Frequently Asked Questions</refTitle
+><webPage
+><url
+>https://lectionary.library.vanderbilt.edu//faq2.php</url
+><dateAccessed
+>Sept 27, 2017</dateAccessed
+></webPage
+></refWork
+><refWork
+id="rVMain"
+><refDate
+>2017</refDate
+><refTitle
+>The Revised Common Lectionary</refTitle
+><webPage
+><url
+>https://lectionary.library.vanderbilt.edu/</url
+><dateAccessed
+>Sept 27, 2017</dateAccessed
+></webPage
+></refWork
+><refWork
+id="rLecContentC"
+><refDate
+>2017</refDate
+><refTitle
+>The Revised Common Lectionary, Year C</refTitle
+><webPage
+><url
+>https://lectionary.library.vanderbilt.edu/lections.php</url
+><dateAccessed
+>Sept 27, 2017</dateAccessed
+></webPage
+></refWork
+><refWork
+id="rLecContentB"
+><refDate
+>2017</refDate
+><refTitle
+>The Revised Common Lectionary, Year B</refTitle
+><webPage
+><url
+>https://lectionary.library.vanderbilt.edu/lections.php</url
+><dateAccessed
+>Sept 27, 2017</dateAccessed
+></webPage
+></refWork
+></refAuthor
+></references
+></backMatter
+><languages
+><language
+font-family="Times New Roman"
+id="lVernacular"
+name="vernacular"
+></language
+><language
+id="lGloss"
+name="gloss"
+></language
+><language
+id="en"
+></language
+></languages
+><types
+><comment
+>The following types are provided as pre-set examples. You may well want to create your own types that refer to one or more of these. You do that by typing in the names of the types in the types attribute of your type.</comment
+><type
+font-weight="bold"
+id="tmenu"
+></type
+><type
+id="t-en"
+></type
+><type
+id="t-fr"
+></type
+><type
+before="XLingPaper"
+id="tXLingPaper"
+></type
+><type
+before="XMLmind"
+id="tXMLmind"
+></type
+><type
+font-weight="bold"
+id="tBold"
+></type
+><type
+font-weight="bold"
+id="tkey"
+></type
+><type
+font-style="italic"
+font-weight="bold"
+id="tBoldItalic"
+></type
+><type
+font-weight="bold"
+id="tEmphasis"
+></type
+><type
+id="tGrammaticalGloss"
+types="tSmallCaps"
+></type
+><type
+font-style="italic"
+font-weight="bold"
+id="tsub"
+></type
+><type
+font-style="italic"
+id="tItalic"
+></type
+><type
+font-style="italic"
+id="tresult"
+></type
+><type
+cssSpecial="text-decoration:none"
+id="tNoOverline"
+xsl-foSpecial="text-decoration=&quot;no-overline&quot;"
+></type
+><type
+font-variant="normal"
+id="tNoSmallCaps"
+></type
+><type
+cssSpecial="text-decoration:none"
+id="tNoStrikethrough"
+xsl-foSpecial="text-decoration=&quot;no-line-through&quot;"
+></type
+><type
+cssSpecial="text-decoration:none"
+id="tNoUnderline"
+xsl-foSpecial="text-decoration=&quot;no-underline&quot;"
+></type
+><type
+cssSpecial="text-decoration:overline"
+id="tOverline"
+xsl-foSpecial="text-decoration=&quot;overline&quot;"
+></type
+><type
+font-style="normal"
+font-variant="normal"
+font-weight="normal"
+id="tRegular"
+></type
+><type
+font-family="Charis SIL Small Caps"
+id="tSmallCaps"
+></type
+><type
+XeLaTeXSpecial="line-through"
+cssSpecial="text-decoration:line-through"
+id="tStrikethrough"
+xsl-foSpecial="text-decoration=&quot;line-through&quot;"
+></type
+><type
+XeLaTeXSpecial="subscript"
+cssSpecial="vertical-align:sub;"
+font-size="65%"
+id="tsubscript"
+xsl-foSpecial="baseline-shift='sub'"
+></type
+><type
+XeLaTeXSpecial="superscript"
+cssSpecial="vertical-align:super;"
+font-size="65%"
+id="tSuperscript"
+xsl-foSpecial="baseline-shift='super'"
+></type
+><type
+XeLaTeXSpecial="underline"
+cssSpecial="text-decoration:underline"
+id="tUnderline"
+xsl-foSpecial="text-decoration=&quot;underline&quot;"
+></type
+><type
+before="Paratext 8"
+id="tPT"
+></type
+><type
+before="Paratext 7"
+id="tPTPrev"
+></type
+><type
+font-family="Courier New"
+id="ttyped"
+></type
+><type
+XeLaTeXSpecial="underline"
+color="#0033cc"
+cssSpecial="text-decoration:underline"
+font-style="normal"
+font-weight="normal"
+id="tlink"
+xsl-foSpecial="text-decoration=&quot;underline&quot;"
+></type
+><comment
+>Add your custom types here.</comment
+><type
+color="#0033ff"
+font-variant="normal"
+id="blue"
+></type
+><type
+color="#006600"
+font-variant="normal"
+id="green"
+></type
+><type
+color="#990000"
+font-variant="normal"
+id="red"
+></type
+></types
+><framedTypes
+><framedType
+align="left"
+backgroundcolor="#FFE6FF"
+description="Note"
+id="ftPink"
+indent-after="2cm"
+indent-before="2cm"
+innerbottommargin=".03in"
+innerleftmargin=".125in"
+innerrightmargin=".125in"
+innertopmargin=".03in"
+spaceafter="16pt"
+spacebefore="16pt"
+></framedType
+><framedType
+backgroundcolor="#FAF0E6"
+description="sample output"
+id="ftSample"
+indent-after=".125in"
+indent-before=".125in"
+innerbottommargin=".125in"
+innerleftmargin=".125in"
+innerrightmargin=".125in"
+innertopmargin=".125in"
+spaceafter=".125in"
+spacebefore=".125in"
+></framedType
+></framedTypes
+></lingPaper
+><xi:include
+href="SILInternationalBookStylesheet.xml"
+xpointer="element(/1)"
+xmlns:xi="http://www.w3.org/2001/XInclude"
+></xi:include
+></styledPaper
+></xlingpaper
+>
